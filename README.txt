@@ -3,23 +3,23 @@ Contributors: micropat
 Donate link: http://www.addtoany.com/contact/
 Tags: widget, sidebar, rss, plugin, links, feed, feeds, images, button, posts, subscribe, add to any, addtoany, add, any, email, e-mail, Google, My, Yahoo, Mixx, iTunes, Feeds
 Requires at least: 2.2
-Tested up to: 2.5.1
-Stable tag: 0.9
+Tested up to: 2.6
+Stable tag: 0.9.1
 
 Lets readers subscribe to your blog using any feed reader.
 
 == Description ==
 
-Lets readers subscribe to your blog using any feed reader, such as Google Reader, My Yahoo!, Netvibes, Pageflakes, and all the rest.  The Subscribe button comes with a drop-down menu that appears on rollover.
+Lets readers **subscribe** to your blog using **any feed reader**, such as Google Reader, My Yahoo!, Netvibes, Pageflakes, and all the rest.  The button comes with Add to Any's customizable Smart Menu, which **places the services visitors use at the top of the menu**, based on each visitor's browsing history.
 
-* Works instantly on mouse-over
+* Add to Any Smart Menu
 * Includes all services
-* Searchable on key-down
 * Services updated automatically
+* Searchable on key-down
 * Keyboard navigation
 * Google Analytics integration
 
-Demo: <a href="http://www.addtoany.com/">http://www.addtoany.com/</a>
+Demo: <a href="http://www.addtoany.com/" title="Subscribe, Share, Save buttons">http://www.addtoany.com/</a>
 
 See also, the <a href="/extend/plugins/add-to-any/">Share/Save/Bookmark button</a> plugin.
 
@@ -28,12 +28,6 @@ See also, the <a href="/extend/plugins/add-to-any/">Share/Save/Bookmark button</
 1. Upload `add-to-any-subscribe` to the `/wp-content/plugins/` directory
 1. Activate the plugin through the `Plugins` menu in WordPress
 1. Go to `Presentation` -> `Widgets` and click `Add` next to "Add to Any Subscribe"
-
-== Frequently Asked Questions ==
-
-= How long will this service be around? =
-
-Forever.
 
 = How often is the list of services updated? =
 

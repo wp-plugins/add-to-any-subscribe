@@ -3,7 +3,7 @@
 Plugin Name: Add to Any: Subscribe Button
 Plugin URI: http://www.addtoany.com/buttons/
 Description: Lets readers subscribe to your blog using any feed reader.  [<a href="widgets.php">Settings</a> - on the Widgets page]
-Version: .9
+Version: .9.1
 Author: MicroPat
 Author URI: http://www.addtoany.com/contact/
 */
@@ -24,7 +24,7 @@ class Add_to_Any_Subscribe_Widget {
 		register_sidebar_widget('Add to Any Subscribe', array($widget,'display'));
 		
 		//Registering the control form.
-		register_widget_control('Add to Any Subscribe', 'A2A_SUBSCRIBE_options_page', 450);
+		register_widget_control('Add to Any Subscribe', 'A2A_SUBSCRIBE_options_widget', 450);
 	}
 
 
@@ -44,17 +44,18 @@ class Add_to_Any_Subscribe_Widget {
 			$button_width	= $button_attrs[1];
 			$button_height	= $button_attrs[2];
 		}
-		$button			= '<img style="margin-left:20px" src="'.trailingslashit(get_option('siteurl')).PLUGINDIR.'/add-to-any-subscribe/'.$button_fname.'" width="'.$button_width.'" height="'.$button_height.'" border="0" alt="Subscribe"/>';
+		$button			= '<img src="'.trailingslashit(get_option('siteurl')).PLUGINDIR.'/add-to-any-subscribe/'.$button_fname.'" width="'.$button_width.'" height="'.$button_height.'" border="0" alt="Subscribe"/>';
 		
 		?>
-        <a name="a2a_dd" onmouseover="a2a_show_dropdown(this)" onmouseout="a2a_onMouseOut_delay()" href="http://www.addtoany.com/subscribe?linkname=<?php echo $sitename_enc; ?>&amp;linkurl=<?php echo $feedurl_enc; ?>"><?php echo $button; ?></a>
+        <a class=".addtoany_subscribe" name="a2a_dd" <?php echo (get_option('A2A_SHARE_SAVE_onclick')=='1') ? 'onclick="a2a_show_dropdown(this);return false"' : 'onmouseover="a2a_show_dropdown(this)"'; ?> onmouseout="a2a_onMouseOut_delay()" href="http://www.addtoany.com/subscribe?linkname=<?php echo $sitename_enc; ?>&amp;linkurl=<?php echo $feedurl_enc; ?>"><?php echo $button; ?></a>
         <script type="text/javascript">
 			a2a_linkname="<?php echo str_replace('"', '\\"', $sitename); ?>";
 			a2a_linkurl="<?php echo $feedurl; ?>";
             <?php echo (get_option('A2A_SUBSCRIBE_hide_embeds')=='-1') ? 'a2a_hide_embeds=0;' : ''; ?>
 			<?php echo (get_option('A2A_SUBSCRIBE_show_title')=='1') ? 'a2a_show_title=1;' : ''; ?>
+			<?php echo stripslashes(get_option('A2A_SHARE_SAVE_additional_js_variables')); ?>
 		</script>
-		<script type="text/javascript" src="http://www.addtoany.com/menu/feed.js"></script>
+		<script type="text/javascript" src="http://static.addtoany.com/menu/feed.js"></script>
 		<?php
 	}
 	
@@ -69,13 +70,13 @@ add_action('widgets_init', array('Add_to_Any_Subscribe_Widget','init'));
 
 
 
-/*****************************
-		OPTIONS
-******************************/
+/*************************************************
+		OPTIONS  ( Design > Widgets )
+*************************************************/
 
 
 // This function outputs the options control panel under the admin screen.
-function A2A_SUBSCRIBE_options_page() {
+function A2A_SUBSCRIBE_options_widget() {
 	
 	if( $_POST[ 'A2A_SUBSCRIBE_submit_hidden' ] == 'Y' ) {
 
@@ -121,19 +122,163 @@ function A2A_SUBSCRIBE_options_page() {
 		</label>
 	</p>
     <p>
-    	<label>
-            <input name="A2A_SUBSCRIBE_hide_embeds" type="checkbox"<?php echo $subscribe_hide_embeds; ?>value="1"/>
-            Hide embedded objects (Flash, video, etc.) when the menu is displayed
-        </label>
-	</p>
-    <p>
-        <label>
-            <input name="A2A_SUBSCRIBE_show_title" type="checkbox"<?php echo $subscribe_show_title; ?>value="1"/>
-            Show the title of the post within the menu
-        </label>
+    	<a href="options-general.php?page=add-to-any-subscribe.php">More Settings...</a>
 	</p>
 	<?php
 	
 }
+
+
+
+
+/************************************************
+		OPTIONS  ( Settings > Subscribe Button )
+*************************************************/
+
+
+function A2A_SUBSCRIBE_options_page() {
+
+    if( $_POST[ 'A2A_SUBSCRIBE_submit_hidden' ] == 'Y' ) {
+
+		update_option( 'A2A_SUBSCRIBE_hide_embeds', ($_POST['A2A_SUBSCRIBE_hide_embeds']=='1') ? '1':'-1' );
+		update_option( 'A2A_SUBSCRIBE_show_title', ($_POST['A2A_SUBSCRIBE_show_title']=='1') ? '1':'-1' );
+		update_option( 'A2A_SUBSCRIBE_onclick', ($_POST['A2A_SUBSCRIBE_onclick']=='1') ? '1':'-1' );
+		update_option( 'A2A_SUBSCRIBE_button', $_POST['A2A_SUBSCRIBE_button'] );
+		update_option( 'A2A_SUBSCRIBE_additional_js_variables', trim($_POST['A2A_SUBSCRIBE_additional_js_variables']) );
+		
+		?>
+    	<div class="updated fade"><p><strong><?php _e('Settings saved.', 'A2A_SUBSCRIBE_trans_domain' ); ?></strong></p></div>
+		<?php
+		
+    }
+
+    ?>
+    
+    <div class="wrap">
+
+	<h2><?php echo __( 'Add to Any: Subscribe Settings', 'A2A_SUBSCRIBE_trans_domain' ); ?></h2>
+
+    <form method="post" action="<?php echo str_replace( '%7E', '~', $_SERVER['REQUEST_URI']); ?>">
+    
+	<?php wp_nonce_field('update-options'); ?>
+    
+    	<input type="hidden" name="A2A_SUBSCRIBE_submit_hidden" value="Y">
+    
+        <table class="form-table">
+        	<tr valign="top">
+            <th scope="row">Button</th>
+            <td><fieldset>
+            	<label>
+                	<input name="A2A_SUBSCRIBE_button" value="subscribe_16_16.png|16|16" type="radio"<?php if(get_option('A2A_SUBSCRIBE_button')=='subscribe_16_16.png|16|16') echo ' checked="checked"'; ?>
+                    	 style="margin:9px 0;vertical-align:middle">
+                    <img src="<?php echo trailingslashit(get_option('siteurl')).PLUGINDIR.'/add-to-any-subscribe/subscribe_16_16.png'; ?>" width="16" height="16" border="0" style="padding:9px;vertical-align:middle" alt="+ Subscribe" title="+ Subscribe"
+                    	onclick="this.parentNode.firstChild.checked=true"/>
+                </label><br>
+                <label>
+                	<input name="A2A_SUBSCRIBE_button" value="subscribe_120_16.gif|120|16" type="radio"<?php if( !get_option('A2A_SUBSCRIBE_button') || get_option('A2A_SUBSCRIBE_button' )=='subscribe_120_16.gif|120|16') echo ' checked="checked"'; ?>
+                    	style="margin:9px 0;vertical-align:middle">
+                    <img src="<?php echo trailingslashit(get_option('siteurl')).PLUGINDIR.'/add-to-any-subscribe/subscribe_120_16.gif'; ?>" width="120" height="16" border="0" style="padding:9px;vertical-align:middle"
+                    	onclick="this.parentNode.firstChild.checked=true"/>
+                </label><br>
+                <label>
+                	<input name="A2A_SUBSCRIBE_button" value="subscribe_171_16.gif|171|16" type="radio"<?php if(get_option('A2A_SUBSCRIBE_button')=='subscribe_171_16.gif|171|16') echo ' checked="checked"'; ?>
+                    	style="margin:9px 0;vertical-align:middle">
+                    <img src="<?php echo trailingslashit(get_option('siteurl')).PLUGINDIR.'/add-to-any-subscribe/subscribe_171_16.gif'; ?>" width="171" height="16" border="0" style="padding:9px;vertical-align:middle"
+                    	onclick="this.parentNode.firstChild.checked=true"/>
+                </label><br>
+                <label>
+                	<input name="A2A_SUBSCRIBE_button" value="subscribe_256_24.gif|256|24" type="radio"<?php if(get_option('A2A_SUBSCRIBE_button')=='subscribe_256_24.gif|256|24') echo ' checked="checked"'; ?>
+                    	style="margin:9px 0;vertical-align:middle">
+                    <img src="<?php echo trailingslashit(get_option('siteurl')).PLUGINDIR.'/add-to-any-subscribe/subscribe_256_24.gif'; ?>" width="256" height="24" border="0" style="padding:9px;vertical-align:middle"
+                    	onclick="this.parentNode.firstChild.checked=true"/>
+				</label>
+            </fieldset></td>
+            </tr>
+            <tr valign="top">
+            <th scope="row">Button Placement</th>
+            <td><fieldset>
+            	If you are using a widget-ready theme, you can use the <a href="widgets.php">widgets page</a> to place the button where you want in your sidebar.
+                <p><a href="widgets.php" class="button-secondary">Open Widgets Panel</a></p>
+                <p>Alternatively, you can place the following code in <a href="theme-editor.php">your template pages</a> (within <code>sidebar.php</code>, <code>index.php</code>, <code>single.php</code>, and/or <code>page.php</code>):<br/>
+                <code>&lt;?php Add_to_Any_Subscribe_Widget::display(); ?&gt;</code></p>
+            </fieldset></td>
+            </tr>
+            <tr valign="top">
+            <th scope="row">Menu Style</th>
+            <td><fieldset>
+                    	Using Add to Any's Menu Styler, you can customize the colors of your Subscribe menu! When you're done, be sure to paste the generated code in the <a href="#" onclick="document.getElementById('A2A_SUBSCRIBE_additional_js_variables').focus();return false">Additional Options</a> box below.
+                    <p>
+                		<a href="http://www.addtoany.com/buttons/subscribe/menu_style/wordpress" class="button-secondary" title="Open the Add to Any Menu Styler in a new window" target="_blank"
+                        	onclick="document.getElementById('A2A_SUBSCRIBE_additional_js_variables').focus();
+                            	document.getElementById('A2A_SUBSCRIBE_menu_styler_note').style.display='';">Open Menu Styler</a>
+					</p>
+            </fieldset></td>
+            </tr>
+            <tr valign="top">
+            <th scope="row">Menu Options</th>
+            <td><fieldset>
+            	<label>
+                	<input name="A2A_SUBSCRIBE_hide_embeds" 
+                        type="checkbox"<?php if(get_option('A2A_SUBSCRIBE_hide_embeds')!='-1') echo ' checked="checked"'; ?> value="1"/>
+                	Hide embedded objects (Flash, video, etc.) that intersect with the menu when displayed
+                </label><br />
+                <label>
+                	<input name="A2A_SUBSCRIBE_show_title" 
+                        type="checkbox"<?php if(get_option('A2A_SUBSCRIBE_show_title')=='1') echo ' checked="checked"'; ?> value="1"/>
+                	Show the title of this blog within the menu
+                </label><br />
+				<label>
+                	<input name="A2A_SUBSCRIBE_onclick" 
+                        type="checkbox"<?php if(get_option('A2A_SUBSCRIBE_onclick')=='1') echo ' checked="checked"'; ?> value="1"/>
+                	Only show the menu when the user clicks the Subscribe button
+                </label>
+            </fieldset></td>
+            </tr>
+            <tr valign="top">
+            <th scope="row">Additional Options</th>
+            <td><fieldset>
+            		<p id="A2A_SUBSCRIBE_menu_styler_note" style="display:none">
+                        <label for="A2A_SUBSCRIBE_additional_js_variables">
+                            <strong>Paste the code from Add to Any's Menu Styler in the box below!</strong>
+                        </label>
+                    </p>
+                    <label for="A2A_SUBSCRIBE_additional_js_variables">
+                    	Below you can set special JavaScript variables to apply to your Subscribe menu.
+                    	Advanced users might want to check out the code generated by Add to Any's general <a href="http://www.addtoany.com/buttons/subscribe">Subscribe button generator</a>.
+					</label>
+                    <p>
+                		<textarea name="A2A_SUBSCRIBE_additional_js_variables" id="A2A_SUBSCRIBE_additional_js_variables" class="code" style="width: 98%; font-size: 12px;" rows="5" cols="50"><?php echo stripslashes(get_option('A2A_SUBSCRIBE_additional_js_variables')); ?></textarea>
+					</p>
+                    <?php if( get_option('A2A_SUBSCRIBE_additional_js_variables')!='' ) { ?>
+                    <label for="A2A_SUBSCRIBE_additional_js_variables"><strong>Note</strong>: If you're adding new code, be careful not to accidentally overwrite any previous code.</label>
+                    <?php } ?>
+            </fieldset></td>
+            </tr>
+        </table>
+        
+        <p class="submit">
+            <input type="submit" name="Submit" value="<?php _e('Save Changes', 'A2A_SUBSCRIBE_trans_domain' ) ?>" />
+        </p>
+    
+    </form>
+    </div>
+
+<?php
+ 
+}
+
+function A2A_SUBSCRIBE_add_menu_link() {
+	if( current_user_can('manage_options') ) {
+		add_options_page(
+			'Add to Any: Subscribe Settings'
+			, 'Subscribe Buttons'
+			, 8 
+			, basename(__FILE__)
+			, 'A2A_SUBSCRIBE_options_page'
+		);
+	}
+}
+
+add_action('admin_menu', 'A2A_SUBSCRIBE_add_menu_link');
 
 ?>
