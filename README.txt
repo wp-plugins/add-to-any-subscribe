@@ -60,10 +60,12 @@ This is done to overcome browser limitations that prevent the drop-down menu fro
 == Changelog ==
 
 .9.5:
+
 * New: Custom buttons (specify a URL)
 * Fix to permit XHTML Strict validation
 
 .9.4:
+
 * New Menu Styler lets you customize the color of the menus
 * New Menu Option: "Only show the menu when the user clicks the Share/Save button"
 * New: Set custom JavaScript variables for further customization
