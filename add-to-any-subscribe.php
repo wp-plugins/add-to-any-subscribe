@@ -51,7 +51,7 @@ class Add_to_Any_Subscribe_Widget {
 		$button			= '<img src="'.$button_src.'" width="'.$button_width.'" height="'.$button_height.'" alt="Subscribe"/>';
 		
 		?>
-        <a class=".addtoany_subscribe" name="a2a_dd" <?php echo (get_option('A2A_SUBSCRIBE_onclick')=='1') ? 'onclick="a2a_show_dropdown(this);return false"' : 'onmouseover="a2a_show_dropdown(this)"'; ?> onmouseout="a2a_onMouseOut_delay()" href="http://www.addtoany.com/subscribe?linkname=<?php echo $sitename_enc; ?>&amp;linkurl=<?php echo $feedurl_enc; ?>"><?php echo $button; ?></a>
+        <a class="addtoany_subscribe" name="a2a_dd" <?php echo (get_option('A2A_SUBSCRIBE_onclick')=='1') ? 'onclick="a2a_show_dropdown(this);return false"' : 'onmouseover="a2a_show_dropdown(this)"'; ?> onmouseout="a2a_onMouseOut_delay()" href="http://www.addtoany.com/subscribe?linkname=<?php echo $sitename_enc; ?>&amp;linkurl=<?php echo $feedurl_enc; ?>"><?php echo $button; ?></a>
         <script type="text/javascript">
 			a2a_linkname="<?php echo str_replace('"', '\\"', $sitename); ?>";
 			a2a_linkurl="<?php echo $feedurl; ?>";
