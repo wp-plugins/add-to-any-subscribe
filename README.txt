@@ -1,10 +1,10 @@
 === Add to Any Subscribe Button ===
 Contributors: micropat
 Donate link: http://www.addtoany.com/contact/
-Tags: widget, sidebar, rss, plugin, links, feed, feeds, images, button, posts, subscribe, add to any, addtoany, add, any, email, e-mail, Google, My, Yahoo, Mixx, iTunes, Feeds
+Tags: widget, sidebar, rss, plugin, links, feed, feeds, images, button, Post, posts, subscribe, add to any, addtoany, add, any, email, e-mail, Google, My, Yahoo, Mixx, iTunes, Feeds
 Requires at least: 2.2
 Tested up to: 2.6
-Stable tag: 0.9.1
+Stable tag: 0.9.2
 
 Lets readers subscribe to your blog using any feed reader.
 
@@ -29,13 +29,15 @@ See also, the <a href="/extend/plugins/add-to-any/">Share/Save/Bookmark button</
 1. Activate the plugin through the `Plugins` menu in WordPress
 1. Go to `Presentation` -> `Widgets` and click `Add` next to "Add to Any Subscribe"
 
+== Frequently Asked Questions ==
+
 = How often is the list of services updated? =
 
 Constantly.
 
 = Where can I choose which button to display and other options? =
 
-Go to `Presentation` > `Widgets`.  Under `Current Widgets`, look for "Add to Any Subscribe", and click `Edit`.
+Go to `Settings` > `Subscribe Buttons`. 
 
 = How come the widget doesn't display once I activate it? =
 
@@ -51,7 +53,26 @@ Using the Theme Editor, you can place the following code in your template pages 
 
 `&lt;?php Add_to_Any_Subscribe_Widget::display(); ?&gt;`
 
+= Why do embedded objects (like Flash) disappear when the menu is displayed? =
+
+This is done to overcome browser limitations that prevent the drop-down menu from displaying on top of intersecting embedded objects.  If you would like to disable this, uncheck the `Hide embedded objects (Flash, video, etc.) that intersect with the menu when displayed` option on the plugin's settings page.
+
 == Screenshots ==
 
 1. This is the Add to Any Subscribe button!
 2. This is the drop-down menu that appears instantly when visitors move the mouse over the Subscribe button!
+
+== Changelog ==
+
+.9.2:
+* New: Custom buttons (specify a URL)
+* Fix to permit XHTML Strict validation
+
+.9.1:
+* New Menu Styler lets you customize the color of the menus
+* New Menu Option: "Only show the menu when the user clicks the Subscribe button"
+* New additional customization: Set custom JavaScript variables
+* Simplified config panel in `Design` > `Widgets` with link to `More Settings...`
+* New full settings panel in: `Settings` > `Subscribe Buttons`
+* Better support for CSS styling: .addtoany_share_save
+* PHP4 legacy and compatibility fixes

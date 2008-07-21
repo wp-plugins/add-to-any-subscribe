@@ -3,7 +3,7 @@
 Plugin Name: Add to Any: Subscribe Button
 Plugin URI: http://www.addtoany.com/buttons/
 Description: Lets readers subscribe to your blog using any feed reader.  [<a href="widgets.php">Settings</a> - on the Widgets page]
-Version: .9.1
+Version: .9.2
 Author: MicroPat
 Author URI: http://www.addtoany.com/contact/
 */
@@ -38,22 +38,26 @@ class Add_to_Any_Subscribe_Widget {
 			$button_fname	= 'subscribe_120_16.gif';
 			$button_width	= '120';
 			$button_height	= "16";
+			$button_src		= trailingslashit(get_option('siteurl')).PLUGINDIR.'/add-to-any-subscribe/'.$button_fname;
+		} else if( get_option('A2A_SUBSCRIBE_button') == 'CUSTOM' ) {
+			$button_src		= get_option('A2A_SUBSCRIBE_button_custom');
 		} else {
 			$button_attrs	= explode( '|', get_option('A2A_SUBSCRIBE_button') );
 			$button_fname	= $button_attrs[0];
 			$button_width	= $button_attrs[1];
 			$button_height	= $button_attrs[2];
+			$button_src		= trailingslashit(get_option('siteurl')).PLUGINDIR.'/add-to-any-subscribe/'.$button_fname;
 		}
-		$button			= '<img src="'.trailingslashit(get_option('siteurl')).PLUGINDIR.'/add-to-any-subscribe/'.$button_fname.'" width="'.$button_width.'" height="'.$button_height.'" border="0" alt="Subscribe"/>';
+		$button			= '<img src="'.$button_src.'" width="'.$button_width.'" height="'.$button_height.'" alt="Subscribe"/>';
 		
 		?>
-        <a class=".addtoany_subscribe" name="a2a_dd" <?php echo (get_option('A2A_SHARE_SAVE_onclick')=='1') ? 'onclick="a2a_show_dropdown(this);return false"' : 'onmouseover="a2a_show_dropdown(this)"'; ?> onmouseout="a2a_onMouseOut_delay()" href="http://www.addtoany.com/subscribe?linkname=<?php echo $sitename_enc; ?>&amp;linkurl=<?php echo $feedurl_enc; ?>"><?php echo $button; ?></a>
+        <a class=".addtoany_subscribe" name="a2a_dd" <?php echo (get_option('A2A_SUBSCRIBE_onclick')=='1') ? 'onclick="a2a_show_dropdown(this);return false"' : 'onmouseover="a2a_show_dropdown(this)"'; ?> onmouseout="a2a_onMouseOut_delay()" href="http://www.addtoany.com/subscribe?linkname=<?php echo $sitename_enc; ?>&amp;linkurl=<?php echo $feedurl_enc; ?>"><?php echo $button; ?></a>
         <script type="text/javascript">
 			a2a_linkname="<?php echo str_replace('"', '\\"', $sitename); ?>";
 			a2a_linkurl="<?php echo $feedurl; ?>";
             <?php echo (get_option('A2A_SUBSCRIBE_hide_embeds')=='-1') ? 'a2a_hide_embeds=0;' : ''; ?>
 			<?php echo (get_option('A2A_SUBSCRIBE_show_title')=='1') ? 'a2a_show_title=1;' : ''; ?>
-			<?php echo stripslashes(get_option('A2A_SHARE_SAVE_additional_js_variables')); ?>
+			<?php echo stripslashes(get_option('A2A_SUBSCRIBE_additional_js_variables')); ?>
 		</script>
 		<script type="text/javascript" src="http://static.addtoany.com/menu/feed.js"></script>
 		<?php
@@ -65,7 +69,11 @@ class Add_to_Any_Subscribe_Widget {
 add_action('widgets_init', array('Add_to_Any_Subscribe_Widget','init'));
 
 
-
+function A2A_SUBSCRIBE_button_css() {
+	?><style type="text/css">.addtoany_subscribe img{border:0;}</style>
+<?
+}
+add_action('wp_head', 'A2A_SUBSCRIBE_button_css');
 
 
 
@@ -81,8 +89,7 @@ function A2A_SUBSCRIBE_options_widget() {
 	if( $_POST[ 'A2A_SUBSCRIBE_submit_hidden' ] == 'Y' ) {
 
 		update_option( 'A2A_SUBSCRIBE_button', $_POST['A2A_SUBSCRIBE_button'] );
-		update_option( 'A2A_SUBSCRIBE_hide_embeds', ($_POST['A2A_SUBSCRIBE_hide_embeds']=='1') ? '1':'-1' );
-		update_option( 'A2A_SUBSCRIBE_show_title', ($_POST['A2A_SUBSCRIBE_show_title']=='1') ? '1':'-1' );
+		update_option( 'A2A_SUBSCRIBE_button_custom', $_POST['A2A_SUBSCRIBE_button_custom'] );
 		
     }
 
@@ -92,8 +99,7 @@ function A2A_SUBSCRIBE_options_widget() {
 	$subscribe_120_16 		= ( !get_option('A2A_SUBSCRIBE_button') || get_option('A2A_SUBSCRIBE_button')=='subscribe_120_16.gif|120|16' ) ? ' checked="checked" ' : ' ';
 	$subscribe_171_16 		= ( get_option('A2A_SUBSCRIBE_button')=='subscribe_171_16.gif|171|16' ) ? ' checked="checked" ' : ' ';
 	$subscribe_256_24 		= ( get_option('A2A_SUBSCRIBE_button')=='subscribe_256_24.gif|256|24' ) ? ' checked="checked" ' : ' ';
-	$subscribe_hide_embeds 	= ( get_option('A2A_SUBSCRIBE_hide_embeds')!='-1' ) ? ' checked="checked" ' : ' ';
-	$subscribe_show_title 	= ( get_option('A2A_SUBSCRIBE_show_title')=='1' ) ? ' checked="checked" ' : ' ';
+	$subscribe_custom 		= ( get_option('A2A_SUBSCRIBE_button')=='CUSTOM' ) ? ' checked="checked" ' : ' ';
 	
 	?>
     <input type="hidden" id="A2A_SUBSCRIBE_submit_hidden" name="A2A_SUBSCRIBE_submit_hidden" value="Y" />
@@ -122,6 +128,14 @@ function A2A_SUBSCRIBE_options_widget() {
 		</label>
 	</p>
     <p>
+    	<label>
+        	<input class="radio" type="radio"<?php echo $subscribe_custom; ?> name="A2A_SUBSCRIBE_button" value="CUSTOM" style="vertical-align:middle" />
+			Custom URL:
+        </label>
+        <input class="widefat" name="A2A_SUBSCRIBE_button_custom" type="text" onclick="e=document.getElementsByName('A2A_SUBSCRIBE_button');e[e.length-1].checked=true" style="vertical-align:middle;width:256px"
+        	value="<?php echo get_option('A2A_SUBSCRIBE_button_custom'); ?>" /> 
+	</p>
+    <p>
     	<a href="options-general.php?page=add-to-any-subscribe.php">More Settings...</a>
 	</p>
 	<?php
@@ -144,6 +158,7 @@ function A2A_SUBSCRIBE_options_page() {
 		update_option( 'A2A_SUBSCRIBE_show_title', ($_POST['A2A_SUBSCRIBE_show_title']=='1') ? '1':'-1' );
 		update_option( 'A2A_SUBSCRIBE_onclick', ($_POST['A2A_SUBSCRIBE_onclick']=='1') ? '1':'-1' );
 		update_option( 'A2A_SUBSCRIBE_button', $_POST['A2A_SUBSCRIBE_button'] );
+		update_option( 'A2A_SUBSCRIBE_button_custom', $_POST['A2A_SUBSCRIBE_button_custom'] );
 		update_option( 'A2A_SUBSCRIBE_additional_js_variables', trim($_POST['A2A_SUBSCRIBE_additional_js_variables']) );
 		
 		?>
@@ -191,7 +206,14 @@ function A2A_SUBSCRIBE_options_page() {
                     	style="margin:9px 0;vertical-align:middle">
                     <img src="<?php echo trailingslashit(get_option('siteurl')).PLUGINDIR.'/add-to-any-subscribe/subscribe_256_24.gif'; ?>" width="256" height="24" border="0" style="padding:9px;vertical-align:middle"
                     	onclick="this.parentNode.firstChild.checked=true"/>
+				</label><br>
+                <label>
+                	<input name="A2A_SUBSCRIBE_button" value="CUSTOM" type="radio"<?php if( get_option('A2A_SUBSCRIBE_button') == 'CUSTOM' ) echo ' checked="checked"'; ?>
+                    	style="margin:9px 0;vertical-align:middle">
+					<span style="margin:0 9px;vertical-align:middle">Image URL:</span>
 				</label>
+  				<input name="A2A_SUBSCRIBE_button_custom" type="text" class="code" size="50" onclick="e=document.getElementsByName('A2A_SUBSCRIBE_button');e[e.length-1].checked=true" style="vertical-align:middle"
+                	value="<?php echo get_option('A2A_SUBSCRIBE_button_custom'); ?>" />
             </fieldset></td>
             </tr>
             <tr valign="top">
