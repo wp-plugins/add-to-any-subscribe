@@ -65,10 +65,12 @@ This is done to overcome browser limitations that prevent the drop-down menu fro
 == Changelog ==
 
 .9.2:
+
 * New: Custom buttons (specify a URL)
 * Fix to permit XHTML Strict validation
 
 .9.1:
+
 * New Menu Styler lets you customize the color of the menus
 * New Menu Option: "Only show the menu when the user clicks the Subscribe button"
 * New additional customization: Set custom JavaScript variables
