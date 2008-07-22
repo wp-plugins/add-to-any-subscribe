@@ -4,7 +4,7 @@ Donate link: http://www.addtoany.com/contact/
 Tags: bookmarking, social, social bookmarking, bookmark, bookmarks, sharing, share, saving, save, Post, posts, page, pages, images, image, admin, statistics, stats, links, plugin, widget, e-mail, email, seo, button, delicious, google, digg, reddit, facebook, myspace, addtoany, add, any
 Requires at least: 2.0
 Tested up to: 2.6
-Stable tag: 0.9.5
+Stable tag: 0.9.5.1
 
 Helps readers share, save, and bookmark your posts and pages using any service, such as Delicious, Digg, Facebook, MySpace, and all the rest.
 
@@ -59,6 +59,10 @@ This is done to overcome browser limitations that prevent the drop-down menu fro
 
 == Changelog ==
 
+.9.5.1:
+
+* Fixed 1 line to support those without short_open_tag
+
 .9.5:
 
 * New: Custom buttons (specify a URL)
@@ -70,4 +74,5 @@ This is done to overcome browser limitations that prevent the drop-down menu fro
 * New Menu Option: "Only show the menu when the user clicks the Share/Save button"
 * New: Set custom JavaScript variables for further customization
 * Better support for CSS styling: .addtoany_share_save
+* PHP support for short_open_tag
 * PHP4 legacy and compatibility fixes
