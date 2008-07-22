@@ -4,7 +4,7 @@ Donate link: http://www.addtoany.com/contact/
 Tags: widget, sidebar, rss, plugin, links, feed, feeds, images, button, Post, posts, subscribe, add to any, addtoany, add, any, email, e-mail, Google, My, Yahoo, Mixx, iTunes, Feeds
 Requires at least: 2.2
 Tested up to: 2.6
-Stable tag: 0.9.2
+Stable tag: 0.9.2.1
 
 Lets readers subscribe to your blog using any feed reader.
 
@@ -64,6 +64,10 @@ This is done to overcome browser limitations that prevent the drop-down menu fro
 
 == Changelog ==
 
+.9.2.1:
+
+* Fixed 1 line to support those without short_open_tag
+
 .9.2:
 
 * New: Custom buttons (specify a URL)
@@ -77,4 +81,5 @@ This is done to overcome browser limitations that prevent the drop-down menu fro
 * Simplified config panel in `Design` > `Widgets` with link to `More Settings...`
 * New full settings panel in: `Settings` > `Subscribe Buttons`
 * Better support for CSS styling: .addtoany_share_save
+* PHP support for short_open_tag
 * PHP4 legacy and compatibility fixes
