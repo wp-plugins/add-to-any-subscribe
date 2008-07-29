@@ -3,7 +3,7 @@
 Plugin Name: Add to Any: Subscribe Button
 Plugin URI: http://www.addtoany.com/buttons/
 Description: Lets readers subscribe to your blog using any feed reader.  [<a href="widgets.php">Settings</a> - on the Widgets page]
-Version: .9.2.1
+Version: .9.2.2
 Author: MicroPat
 Author URI: http://www.addtoany.com/contact/
 */
@@ -36,22 +36,24 @@ class Add_to_Any_Subscribe_Widget {
 
 		if( !get_option('A2A_SUBSCRIBE_button') ) {
 			$button_fname	= 'subscribe_120_16.gif';
-			$button_width	= '120';
-			$button_height	= "16";
+			$button_width	= ' width="120"';
+			$button_height	= ' height="16"';
 			$button_src		= trailingslashit(get_option('siteurl')).PLUGINDIR.'/add-to-any-subscribe/'.$button_fname;
 		} else if( get_option('A2A_SUBSCRIBE_button') == 'CUSTOM' ) {
 			$button_src		= get_option('A2A_SUBSCRIBE_button_custom');
+			$button_width	= '';
+			$button_height	= '';
 		} else {
 			$button_attrs	= explode( '|', get_option('A2A_SUBSCRIBE_button') );
 			$button_fname	= $button_attrs[0];
-			$button_width	= $button_attrs[1];
-			$button_height	= $button_attrs[2];
+			$button_width	= ' width="'.$button_attrs[1].'"';
+			$button_height	= ' height="'.$button_attrs[2].'"';
 			$button_src		= trailingslashit(get_option('siteurl')).PLUGINDIR.'/add-to-any-subscribe/'.$button_fname;
 		}
-		$button			= '<img src="'.$button_src.'" width="'.$button_width.'" height="'.$button_height.'" alt="Subscribe"/>';
+		$button			= '<img src="'.$button_src.'"'.$button_width.$button_height.' alt="Subscribe"/>';
 		
 		?>
-        <a class="addtoany_subscribe" name="a2a_dd" <?php echo (get_option('A2A_SUBSCRIBE_onclick')=='1') ? 'onclick="a2a_show_dropdown(this);return false"' : 'onmouseover="a2a_show_dropdown(this)"'; ?> onmouseout="a2a_onMouseOut_delay()" href="http://www.addtoany.com/subscribe?linkname=<?php echo $sitename_enc; ?>&amp;linkurl=<?php echo $feedurl_enc; ?>"><?php echo $button; ?></a>
+        <a class="a2a_dd addtoany_subscribe" <?php echo (get_option('A2A_SUBSCRIBE_onclick')=='1') ? 'onclick="a2a_show_dropdown(this);return false"' : 'onmouseover="a2a_show_dropdown(this)"'; ?> onmouseout="a2a_onMouseOut_delay()" href="http://www.addtoany.com/subscribe?linkname=<?php echo $sitename_enc; ?>&amp;linkurl=<?php echo $feedurl_enc; ?>"><?php echo $button; ?></a>
         <script type="text/javascript">
 			a2a_linkname="<?php echo str_replace('"', '\\"', $sitename); ?>";
 			a2a_linkurl="<?php echo $feedurl; ?>";

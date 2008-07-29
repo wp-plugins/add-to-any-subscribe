@@ -4,7 +4,7 @@ Donate link: http://www.addtoany.com/contact/
 Tags: widget, sidebar, rss, plugin, links, feed, feeds, images, button, Post, posts, subscribe, add to any, addtoany, add, any, email, e-mail, Google, My, Yahoo, Mixx, iTunes, Feeds
 Requires at least: 2.2
 Tested up to: 2.6
-Stable tag: 0.9.2.1
+Stable tag: 0.9.2.2
 
 Lets readers subscribe to your blog using any feed reader.
 
@@ -63,6 +63,11 @@ This is done to overcome browser limitations that prevent the drop-down menu fro
 2. This is the drop-down menu that appears instantly when visitors move the mouse over the Subscribe button!
 
 == Changelog ==
+
+.9.2.2:
+
+* Fixed bug in Internet Explorer 6 that caused custom buttons to have a height and width of 0
+* Removed the XHTML depreciated `name` attribute from the button's anchor
 
 .9.2.1:
 
