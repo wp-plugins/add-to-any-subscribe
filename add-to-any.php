@@ -3,7 +3,7 @@
 Plugin Name: Add to Any: Share/Save/Bookmark Button
 Plugin URI: http://www.addtoany.com/
 Description: Helps readers share, save, and bookmark your posts and pages using any service.  [<a href="options-general.php?page=add-to-any.php">Settings</a>]
-Version: .9.5.1
+Version: .9.5.2
 Author: MicroPat
 Author URI: http://www.addtoany.com/contact/
 */
@@ -57,16 +57,18 @@ function ADDTOANY_SHARE_SAVE_BUTTON($output_buffering=false) {
 	
 	if( !get_option('A2A_SHARE_SAVE_button') ) {
 		$button_fname	= 'share_save_120_16.gif';
-		$button_width	= '120';
-		$button_height	= "16";
+		$button_width	= ' width="120"';
+		$button_height	= ' height="16"';
 		$button_src		= trailingslashit(get_option('siteurl')).PLUGINDIR.'/add-to-any/'.$button_fname;
 	} else if( get_option('A2A_SHARE_SAVE_button') == 'CUSTOM' ) {
 		$button_src		= get_option('A2A_SHARE_SAVE_button_custom');
+		$button_width	= '';
+		$button_height	= '';
 	} else {
 		$button_attrs	= explode( '|', get_option('A2A_SHARE_SAVE_button') );
 		$button_fname	= $button_attrs[0];
-		$button_width	= $button_attrs[1];
-		$button_height	= $button_attrs[2];
+		$button_width	= ' width="'.$button_attrs[1].'"';
+		$button_height	= ' height="'.$button_attrs[2].'"';
 		$button_src		= trailingslashit(get_option('siteurl')).PLUGINDIR.'/add-to-any/'.$button_fname;
 	}
 	if( $button_attrs[0] == 'favicon.png' ) {
@@ -75,10 +77,10 @@ function ADDTOANY_SHARE_SAVE_BUTTON($output_buffering=false) {
 		$style			= ' style="'.$style_bg.'padding:1px 5px 5px 22px"';
 		$button			= 'Share/Save';
 	} else 
-		$button			= '<img src="'.$button_src.'" width="'.$button_width.'" height="'.$button_height.'" alt="Share/Save/Bookmark"/>';
+		$button			= '<img src="'.$button_src.'"'.$button_width.$button_height.' alt="Share/Save/Bookmark"/>';
 	?>
 
-    <a class="addtoany_share_save" name="a2a_dd" <?php echo (get_option('A2A_SHARE_SAVE_onclick')=='1') ? 'onclick="a2a_show_dropdown(this);return false"' : 'onmouseover="a2a_show_dropdown(this)"'; ?> onmouseout="a2a_onMouseOut_delay()" href="http://www.addtoany.com/share_save?sitename=<?php echo $sitename_enc; ?>&amp;siteurl=<?php echo $siteurl_enc; ?>&amp;linkname=<?php echo $linkname_enc; ?>&amp;linkurl=<?php echo $linkurl_enc; ?>"<?php echo $style; ?>><?php echo $button; ?></a>
+    <a class="a2a_dd addtoany_share_save" <?php echo (get_option('A2A_SHARE_SAVE_onclick')=='1') ? 'onclick="a2a_show_dropdown(this);return false"' : 'onmouseover="a2a_show_dropdown(this)"'; ?> onmouseout="a2a_onMouseOut_delay()" href="http://www.addtoany.com/share_save?sitename=<?php echo $sitename_enc; ?>&amp;siteurl=<?php echo $siteurl_enc; ?>&amp;linkname=<?php echo $linkname_enc; ?>&amp;linkurl=<?php echo $linkurl_enc; ?>"<?php echo $style; ?>><?php echo $button; ?></a>
     <script type="text/javascript">
 		a2a_linkname="<?php echo str_replace('"', '\\"', $linkname); ?>";
 		a2a_linkurl="<?php echo $linkurl; ?>";
