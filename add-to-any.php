@@ -3,10 +3,14 @@
 Plugin Name: Add to Any: Share/Save/Bookmark Button
 Plugin URI: http://www.addtoany.com/
 Description: Helps readers share, save, and bookmark your posts and pages using any service.  [<a href="options-general.php?page=add-to-any.php">Settings</a>]
-Version: .9.5.2
+Version: .9.6
 Author: MicroPat
 Author URI: http://www.addtoany.com/contact/
 */
+
+
+if( !isset($A2A_javascript) )
+	$A2A_javascript = '';
 
 
 // Returns the utf string corresponding to the unicode value (from php.net, courtesy - romans@void.lv)
@@ -20,6 +24,7 @@ if (!function_exists('A2A_SHARE_SAVE_code2utf')) {
 		return '';
 	}
 }
+
 // Since UTF-8 does not work in PHP4 ( http://us2.php.net/manual/en/function.html-entity-decode.php ) :
 if (!function_exists('A2A_SHARE_SAVE_html_entity_decode_utf8')) {
 	function A2A_SHARE_SAVE_html_entity_decode_utf8($string)
@@ -81,20 +86,38 @@ function ADDTOANY_SHARE_SAVE_BUTTON($output_buffering=false) {
 	?>
 
     <a class="a2a_dd addtoany_share_save" <?php echo (get_option('A2A_SHARE_SAVE_onclick')=='1') ? 'onclick="a2a_show_dropdown(this);return false"' : 'onmouseover="a2a_show_dropdown(this)"'; ?> onmouseout="a2a_onMouseOut_delay()" href="http://www.addtoany.com/share_save?sitename=<?php echo $sitename_enc; ?>&amp;siteurl=<?php echo $siteurl_enc; ?>&amp;linkname=<?php echo $linkname_enc; ?>&amp;linkurl=<?php echo $linkurl_enc; ?>"<?php echo $style; ?>><?php echo $button; ?></a>
-    <script type="text/javascript">
-		a2a_linkname="<?php echo str_replace('"', '\\"', $linkname); ?>";
-		a2a_linkurl="<?php echo $linkurl; ?>";
-		<?php echo (get_option('A2A_SHARE_SAVE_hide_embeds')=='-1') ? 'a2a_hide_embeds=0;' : ''; ?>
-		<?php echo (get_option('A2A_SHARE_SAVE_show_title')=='1') ? 'a2a_show_title=1;' : ''; ?>
-		<?php echo stripslashes(get_option('A2A_SHARE_SAVE_additional_js_variables')); ?>
-    </script>
-    <script type="text/javascript" src="http://static.addtoany.com/menu/page.js"></script>
 
 	<?php
+	global $A2A_javascript, $A2A_SHARE_SAVE_external_script_called;
+	if( $A2A_javascript == '' || !$A2A_SHARE_SAVE_external_script_called ) {
+		$external_script_call = '</script><script type="text/javascript" src="http://static.addtoany.com/menu/page.js"></script>';
+		$A2A_SHARE_SAVE_external_script_called = true;
+	}
+	else
+		$external_script_call = 'a2a_init("page");</script>';
+	$A2A_javascript .= '<script type="text/javascript">' . "\n"
+		. 'a2a_linkname="' . str_replace('"', '\\"', $linkname) . '";' . "\n"
+		. 'a2a_linkurl="' . $linkurl . '";' . "\n"
+		. ((get_option('A2A_SHARE_SAVE_hide_embeds')=='-1') ? 'a2a_hide_embeds=0;' . "\n" : '')
+		. ((get_option('A2A_SHARE_SAVE_show_title')=='1') ? 'a2a_show_title=1;' . "\n" : '')
+		. stripslashes(get_option('A2A_SHARE_SAVE_additional_js_variables')) . "\n"
+		. $external_script_call . "\n\n";
+	
+	
+	remove_action('wp_footer', 'A2A_menu_javascript');
+	add_action('wp_footer', 'A2A_menu_javascript');
+	
 	if($output_buffering) {
 		$button = ob_get_contents();
 		ob_end_clean();
 		return $button;
+	}
+}
+
+if (!function_exists('A2A_menu_javascript')) {
+	function A2A_menu_javascript() {
+		global $A2A_javascript;
+		echo $A2A_javascript;
 	}
 }
 
@@ -123,8 +146,6 @@ function A2A_SHARE_SAVE_button_css() {
 }
 
 add_action('wp_head', 'A2A_SHARE_SAVE_button_css');
-
-
 
 
 
