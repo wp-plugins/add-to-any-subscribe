@@ -3,12 +3,19 @@
 Plugin Name: Add to Any: Subscribe Button
 Plugin URI: http://www.addtoany.com/buttons/
 Description: Lets readers subscribe to your blog using any feed reader.  [<a href="widgets.php">Settings</a> - on the Widgets page]
-Version: .9.2.2
+Version: .9.3
 Author: MicroPat
 Author URI: http://www.addtoany.com/contact/
 */
 
+
+if( !isset($A2A_javascript) )
+	$A2A_javascript = '';
+
+		
 class Add_to_Any_Subscribe_Widget {
+
+	
 
   	// static init callback
 	function init() {
@@ -28,11 +35,15 @@ class Add_to_Any_Subscribe_Widget {
 	}
 
 
-	function display() {
+	function display( $args = false ) {
+
 		$sitename		= get_bloginfo('name');
 		$sitename_enc	= rawurlencode( $sitename );
 		$feedurl		= get_bloginfo('rss2_url');
 		$feedurl_enc 	= rawurlencode( $feedurl );
+		
+		if( $args )
+			extract( $args );
 
 		if( !get_option('A2A_SUBSCRIBE_button') ) {
 			$button_fname	= 'subscribe_120_16.gif';
@@ -52,23 +63,43 @@ class Add_to_Any_Subscribe_Widget {
 		}
 		$button			= '<img src="'.$button_src.'"'.$button_width.$button_height.' alt="Subscribe"/>';
 		
-		?>
+		echo $before_widget; ?>
+
         <a class="a2a_dd addtoany_subscribe" <?php echo (get_option('A2A_SUBSCRIBE_onclick')=='1') ? 'onclick="a2a_show_dropdown(this);return false"' : 'onmouseover="a2a_show_dropdown(this)"'; ?> onmouseout="a2a_onMouseOut_delay()" href="http://www.addtoany.com/subscribe?linkname=<?php echo $sitename_enc; ?>&amp;linkurl=<?php echo $feedurl_enc; ?>"><?php echo $button; ?></a>
-        <script type="text/javascript">
-			a2a_linkname="<?php echo str_replace('"', '\\"', $sitename); ?>";
-			a2a_linkurl="<?php echo $feedurl; ?>";
-            <?php echo (get_option('A2A_SUBSCRIBE_hide_embeds')=='-1') ? 'a2a_hide_embeds=0;' : ''; ?>
-			<?php echo (get_option('A2A_SUBSCRIBE_show_title')=='1') ? 'a2a_show_title=1;' : ''; ?>
-			<?php echo stripslashes(get_option('A2A_SUBSCRIBE_additional_js_variables')); ?>
-		</script>
-		<script type="text/javascript" src="http://static.addtoany.com/menu/feed.js"></script>
-		<?php
+        <?php echo $after_widget;
+		
+		global $A2A_javascript, $A2A_SUBSCRIBE_external_script_called;
+		if( $A2A_javascript == '' || !$A2A_SUBSCRIBE_external_script_called ) {
+			$external_script_call = '</script><script type="text/javascript" src="http://static.addtoany.com/menu/feed.js"></script>';
+			$A2A_SUBSCRIBE_external_script_called = true;
+		}
+		else
+			$external_script_call = 'a2a_init("feed");</script>';
+		$A2A_javascript .= '<script type="text/javascript">' . "\n"
+			. 'a2a_linkname="' . str_replace('"', '\\"', $sitename) . '";' . "\n"
+			. 'a2a_linkurl="' . $feedurl . '";' . "\n"
+			. ((get_option('A2A_SUBSCRIBE_hide_embeds')=='-1') ? 'a2a_hide_embeds=0;' . "\n" : '')
+			. ((get_option('A2A_SUBSCRIBE_show_title')=='1') ? 'a2a_show_title=1;' . "\n" : '')
+			. stripslashes(get_option('A2A_SUBSCRIBE_additional_js_variables')) . "\n"
+			. $external_script_call . "\n\n";
+		
+		remove_action('wp_footer', 'A2A_menu_javascript');
+		add_action('wp_footer', 'A2A_menu_javascript');
+		
 	}
 	
 }
 
 // Run our code later in case this loads prior to any required plugins.
 add_action('widgets_init', array('Add_to_Any_Subscribe_Widget','init'));
+
+
+if (!function_exists('A2A_menu_javascript')) {
+	function A2A_menu_javascript() {
+		global $A2A_javascript;
+		echo $A2A_javascript;
+	}
+}
 
 
 function A2A_SUBSCRIBE_button_css() {

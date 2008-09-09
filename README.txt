@@ -3,8 +3,8 @@ Contributors: micropat
 Donate link: http://www.addtoany.com/contact/
 Tags: widget, sidebar, rss, plugin, links, feed, feeds, images, button, Post, posts, subscribe, add to any, addtoany, add, any, email, e-mail, Google, My, Yahoo, Mixx, iTunes, Feeds
 Requires at least: 2.2
-Tested up to: 2.6
-Stable tag: 0.9.2.2
+Tested up to: 2.6.2
+Stable tag: 0.9.3
 
 Lets readers subscribe to your blog using any feed reader.
 
@@ -63,6 +63,12 @@ This is done to overcome browser limitations that prevent the drop-down menu fro
 2. This is the drop-down menu that appears instantly when visitors move the mouse over the Subscribe button!
 
 == Changelog ==
+
+.9.3:
+
+* Moved external JavaScript to bottom so that content is prioritized over HTTP requests to static.addtoany.com
+* Added support to better conform to widget-ready themes
+* Fixed markup generation to support list containers and ensure W3C validation
 
 .9.2.2:
 
