@@ -51,7 +51,13 @@ Also, be sure to deactivate any previous versions of the widget in the `Plugins`
 
 Using the Theme Editor, you can place the following code in your template pages (within sidebar.php, index.php, single.php, and/or page.php):
 
-`&lt;?php Add_to_Any_Subscribe_Widget::display(); ?&gt;`
+`<?php Add_to_Any_Subscribe_Widget::display(); ?>`
+
+= Why isn't the drop-down menu appearing? =
+
+It's likely because your your theme wasn't <a href="http://codex.wordpress.org/Theme_Development#Plugin_API_Hooks" target="_blank">coded properly</a>.  Using the Theme Editor, make sure that the following piece of code is included in your theme's `footer.php` file just before the `</body>` line:
+
+`<?php wp_footer(); ?>`
 
 = Why do embedded objects (like Flash) disappear when the menu is displayed? =
 
@@ -67,6 +73,7 @@ This is done to overcome browser limitations that prevent the drop-down menu fro
 .9.3:
 
 * Moved external JavaScript to bottom so that content is prioritized over HTTP requests to static.addtoany.com
+ * Please note that some improperly-coded themes may prevent this from working. See the FAQ entry for "Why isn't the drop-down menu appearing?" if this is the case.
 * Added support to better conform to widget-ready themes
 * Fixed markup generation to support list containers and ensure W3C validation
 
