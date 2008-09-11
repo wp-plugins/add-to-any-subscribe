@@ -48,6 +48,12 @@ If your button isn't already set up to appear (it is by default), type the follo
 
 Type the following tag into the page or post that you do not want the button to appear in: `<!--nosharesave-->`
 
+= Why isn't the drop-down menu appearing? =
+
+It's likely because your your theme wasn't <a href="http://codex.wordpress.org/Theme_Development#Plugin_API_Hooks" target="_blank">coded properly</a>.  Using the Theme Editor, make sure that the following piece of code is included in your theme's `footer.php` file just before the `</body>` line:
+
+`<?php wp_footer(); ?>`
+
 = Why do embedded objects (like Flash) disappear when the menu is displayed? =
 
 This is done to overcome browser limitations that prevent the drop-down menu from displaying on top of intersecting embedded objects.  If you would like to disable this, uncheck the `Hide embedded objects (Flash, video, etc.) that intersect with the menu when displayed` option on the plugin's settings page.
@@ -62,6 +68,7 @@ This is done to overcome browser limitations that prevent the drop-down menu fro
 .9.6:
 
 * Moved external JavaScript to bottom so that content is prioritized over HTTP requests to static.addtoany.com
+ * Please note that some improperly-coded themes may prevent this from working. See the FAQ entry for "Why isn't the drop-down menu appearing?" if this is the case.
 
 .9.5.2:
 
