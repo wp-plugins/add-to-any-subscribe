@@ -3,7 +3,7 @@
 Plugin Name: Add to Any: Subscribe Button
 Plugin URI: http://www.addtoany.com/buttons/
 Description: Lets readers subscribe to your blog using any feed reader.  [<a href="widgets.php">Settings</a> - on the Widgets page]
-Version: .9.5
+Version: .9.5.1
 Author: Add to Any
 Author URI: http://www.addtoany.com/contact/
 */
