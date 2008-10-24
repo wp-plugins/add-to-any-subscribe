@@ -3,7 +3,7 @@
 Plugin Name: Add to Any: Share/Save/Bookmark Button
 Plugin URI: http://www.addtoany.com/
 Description: Helps readers share, save, and bookmark your posts and pages using any service.  [<a href="options-general.php?page=add-to-any.php">Settings</a>]
-Version: .9.7
+Version: .9.8
 Author: Add to Any
 Author URI: http://www.addtoany.com/contact/
 */
@@ -23,49 +23,13 @@ function A2A_SHARE_SAVE_textdomain() {
 add_action('init', 'A2A_SHARE_SAVE_textdomain');
 
 
-// Returns the utf string corresponding to the unicode value (from php.net, courtesy - romans@void.lv)
-if (!function_exists('A2A_SHARE_SAVE_code2utf')) {
-	function A2A_SHARE_SAVE_code2utf($num)
-	{
-		if ($num < 128) return chr($num);
-		if ($num < 2048) return chr(($num >> 6) + 192) . chr(($num & 63) + 128);
-		if ($num < 65536) return chr(($num >> 12) + 224) . chr((($num >> 6) & 63) + 128) . chr(($num & 63) + 128);
-		if ($num < 2097152) return chr(($num >> 18) + 240) . chr((($num >> 12) & 63) + 128) . chr((($num >> 6) & 63) + 128) . chr(($num & 63) + 128);
-		return '';
-	}
-}
-
-// Since UTF-8 does not work in PHP4 ( http://us2.php.net/manual/en/function.html-entity-decode.php ) :
-if (!function_exists('A2A_SHARE_SAVE_html_entity_decode_utf8')) {
-	function A2A_SHARE_SAVE_html_entity_decode_utf8($string)
-	{
-		static $trans_tbl;
-	   
-		// replace numeric entities
-		$string = preg_replace('~&#x([0-9a-f]+);~ei', 'A2A_SHARE_SAVE_code2utf(hexdec("\\1"))', $string);
-		$string = preg_replace('~&#([0-9]+);~e', 'A2A_SHARE_SAVE_code2utf(\\1)', $string);
-	
-		// replace literal entities
-		if (!isset($trans_tbl))
-		{
-			$trans_tbl = array();
-		   
-			foreach (get_html_translation_table(HTML_ENTITIES) as $val=>$key)
-				$trans_tbl[$key] = utf8_encode($val);
-		}
-	   
-		return strtr($string, $trans_tbl);
-	}
-}
-
-
 function ADDTOANY_SHARE_SAVE_BUTTON($output_buffering=false) {
 	
 	if($output_buffering)ob_start();
 	
 	$sitename_enc	= rawurlencode( get_bloginfo('name') );
 	$siteurl_enc	= rawurlencode( trailingslashit( get_bloginfo('url') ) );
-	$linkname		= A2A_SHARE_SAVE_html_entity_decode_utf8( get_the_title() );
+	$linkname		= get_the_title();
 	$linkname_enc	= rawurlencode( $linkname );
 	$linkurl		= get_permalink($post->ID);
 	$linkurl_enc	= rawurlencode( $linkurl );
@@ -79,6 +43,8 @@ function ADDTOANY_SHARE_SAVE_BUTTON($output_buffering=false) {
 		$button_src		= get_option('A2A_SHARE_SAVE_button_custom');
 		$button_width	= '';
 		$button_height	= '';
+	} else if( get_option('A2A_SHARE_SAVE_button') == 'TEXT' ) {
+		$button_text	= get_option('A2A_SHARE_SAVE_button_text');
 	} else {
 		$button_attrs	= explode( '|', get_option('A2A_SHARE_SAVE_button') );
 		$button_fname	= $button_attrs[0];
@@ -91,32 +57,41 @@ function ADDTOANY_SHARE_SAVE_BUTTON($output_buffering=false) {
 		$style_bg		= ';' . $style_bg . ' !important;';
 		$style			= ' style="'.$style_bg.'padding:1px 5px 5px 22px"';
 		$button			= 'Share/Save';
-	} else 
+	} else if( $button_text ) {
+		$button			= $button_text;
+	} else
 		$button			= '<img src="'.$button_src.'"'.$button_width.$button_height.' alt="Share/Save/Bookmark"/>';
 	?>
 
-    <a class="a2a_dd addtoany_share_save" <?php echo (get_option('A2A_SHARE_SAVE_onclick')=='1') ? 'onclick="a2a_show_dropdown(this);return false"' : 'onmouseover="a2a_show_dropdown(this)"'; ?> onmouseout="a2a_onMouseOut_delay()" href="http://www.addtoany.com/share_save?sitename=<?php echo $sitename_enc; ?>&amp;siteurl=<?php echo $siteurl_enc; ?>&amp;linkname=<?php echo $linkname_enc; ?>&amp;linkurl=<?php echo $linkurl_enc; ?>"<?php echo $style; ?>><?php echo $button; ?></a>
+    <a class="a2a_dd addtoany_share_save" <?php 
+		if( !is_feed() ) {
+			echo (get_option('A2A_SHARE_SAVE_onclick')=='1') ? 'onclick="a2a_show_dropdown(this);return false"' : 'onmouseover="a2a_show_dropdown(this)"'; echo ' onmouseout="a2a_onMouseOut_delay()" '; 
+		} ?>href="http://www.addtoany.com/share_save?sitename=<?php echo $sitename_enc; ?>&amp;siteurl=<?php echo $siteurl_enc; ?>&amp;linkname=<?php echo $linkname_enc; ?>&amp;linkurl=<?php echo $linkurl_enc; ?>"<?php echo $style; ?>><?php echo $button; ?></a>
 
 	<?php
-	global $A2A_javascript, $A2A_SHARE_SAVE_external_script_called;
-	if( $A2A_javascript == '' || !$A2A_SHARE_SAVE_external_script_called ) {
-		$external_script_call = '</script><script type="text/javascript" src="http://static.addtoany.com/menu/page.js"></script>';
-		$A2A_SHARE_SAVE_external_script_called = true;
+	
+	if( !is_feed() ) {
+	
+		global $A2A_javascript, $A2A_SHARE_SAVE_external_script_called;
+		if( $A2A_javascript == '' || !$A2A_SHARE_SAVE_external_script_called ) {
+			$external_script_call = '</script><script type="text/javascript" src="http://static.addtoany.com/menu/page.js"></script>';
+			$A2A_SHARE_SAVE_external_script_called = true;
+		}
+		else
+			$external_script_call = 'a2a_init("page");</script>';
+		$A2A_javascript .= '<script type="text/javascript">' . "\n"
+			. A2A_menu_locale()
+			. 'a2a_linkname="' . js_escape($linkname) . '";' . "\n"
+			. 'a2a_linkurl="' . $linkurl . '";' . "\n"
+			. ((get_option('A2A_SHARE_SAVE_hide_embeds')=='-1') ? 'a2a_hide_embeds=0;' . "\n" : '')
+			. ((get_option('A2A_SHARE_SAVE_show_title')=='1') ? 'a2a_show_title=1;' . "\n" : '')
+			. stripslashes(get_option('A2A_SHARE_SAVE_additional_js_variables')) . "\n"
+			. $external_script_call . "\n\n";
+		
+		remove_action('wp_footer', 'A2A_menu_javascript');
+		add_action('wp_footer', 'A2A_menu_javascript');
+	
 	}
-	else
-		$external_script_call = 'a2a_init("page");</script>';
-	$A2A_javascript .= '<script type="text/javascript">' . "\n"
-		. A2A_menu_locale()
-		. 'a2a_linkname="' . str_replace('"', '\\"', $linkname) . '";' . "\n"
-		. 'a2a_linkurl="' . $linkurl . '";' . "\n"
-		. ((get_option('A2A_SHARE_SAVE_hide_embeds')=='-1') ? 'a2a_hide_embeds=0;' . "\n" : '')
-		. ((get_option('A2A_SHARE_SAVE_show_title')=='1') ? 'a2a_show_title=1;' . "\n" : '')
-		. stripslashes(get_option('A2A_SHARE_SAVE_additional_js_variables')) . "\n"
-		. $external_script_call . "\n\n";
-	
-	
-	remove_action('wp_footer', 'A2A_menu_javascript');
-	add_action('wp_footer', 'A2A_menu_javascript');
 	
 	if($output_buffering) {
 		$button = ob_get_contents();
@@ -163,7 +138,8 @@ function A2A_SHARE_SAVE_to_bottom_of_content($content) {
 			( !is_page() && get_option('A2A_SHARE_SAVE_display_in_posts')=='-1' ) || 								// All posts
 			( !is_page() && !is_single() && get_option('A2A_SHARE_SAVE_display_in_posts_on_front_page')=='-1' ) ||  // Front page posts
 			( is_page() && get_option('A2A_SHARE_SAVE_display_in_pages')=='-1' ) ||									// Pages
-			( (strpos($content, '<!--nosharesave-->')!==false ) )													// <!--nosharesave-->
+			( (strpos($content, '<!--nosharesave-->')!==false ) ) ||												// <!--nosharesave-->
+			( is_feed() && (get_option('A2A_SHARE_SAVE_display_in_feed')=='-1') )									// Display in feed?
 		)
 	)	
 		return $content;
@@ -172,7 +148,7 @@ function A2A_SHARE_SAVE_to_bottom_of_content($content) {
 	return $content;
 }
 
-add_action('the_content', 'A2A_SHARE_SAVE_to_bottom_of_content');
+add_action('the_content', 'A2A_SHARE_SAVE_to_bottom_of_content', 98);
 
 
 function A2A_SHARE_SAVE_button_css() {
@@ -197,11 +173,13 @@ function A2A_SHARE_SAVE_options_page() {
         update_option( 'A2A_SHARE_SAVE_display_in_posts_on_front_page', ($_POST['A2A_SHARE_SAVE_display_in_posts_on_front_page']=='1') ? '1':'-1' );
 		update_option( 'A2A_SHARE_SAVE_display_in_posts', ($_POST['A2A_SHARE_SAVE_display_in_posts']=='1') ? '1':'-1' );
 		update_option( 'A2A_SHARE_SAVE_display_in_pages', ($_POST['A2A_SHARE_SAVE_display_in_pages']=='1') ? '1':'-1' );
+		update_option( 'A2A_SHARE_SAVE_display_in_feed', ($_POST['A2A_SHARE_SAVE_display_in_feed']=='1') ? '1':'-1' );
 		update_option( 'A2A_SHARE_SAVE_hide_embeds', ($_POST['A2A_SHARE_SAVE_hide_embeds']=='1') ? '1':'-1' );
 		update_option( 'A2A_SHARE_SAVE_show_title', ($_POST['A2A_SHARE_SAVE_show_title']=='1') ? '1':'-1' );
 		update_option( 'A2A_SHARE_SAVE_onclick', ($_POST['A2A_SHARE_SAVE_onclick']=='1') ? '1':'-1' );
 		update_option( 'A2A_SHARE_SAVE_button', $_POST['A2A_SHARE_SAVE_button'] );
 		update_option( 'A2A_SHARE_SAVE_button_custom', $_POST['A2A_SHARE_SAVE_button_custom'] );
+		update_option( 'A2A_SHARE_SAVE_button_text', ( trim($_POST['A2A_SHARE_SAVE_button_text']) != '' ) ? $_POST['A2A_SHARE_SAVE_button_text'] : "Share/Save" );
 		update_option( 'A2A_SHARE_SAVE_additional_js_variables', trim($_POST['A2A_SHARE_SAVE_additional_js_variables']) );
 		
 		?>
@@ -255,8 +233,15 @@ function A2A_SHARE_SAVE_options_page() {
                     	style="margin:9px 0;vertical-align:middle">
 					<span style="margin:0 9px;vertical-align:middle"><? _e("Image URL"); ?>:</span>
 				</label>
-  				<input name="A2A_SHARE_SAVE_button_custom" type="text" class="code" size="50" onclick="e=document.getElementsByName('A2A_SHARE_SAVE_button');e[e.length-1].checked=true" style="vertical-align:middle"
-                	value="<?php echo get_option('A2A_SHARE_SAVE_button_custom'); ?>" />
+  				<input name="A2A_SHARE_SAVE_button_custom" type="text" class="code" size="50" onclick="e=document.getElementsByName('A2A_SHARE_SAVE_button');e[e.length-2].checked=true" style="vertical-align:middle"
+                	value="<?php echo get_option('A2A_SHARE_SAVE_button_custom'); ?>" /><br>
+				<label>
+                	<input name="A2A_SHARE_SAVE_button" value="TEXT" type="radio"<?php if( get_option('A2A_SHARE_SAVE_button') == 'TEXT' ) echo ' checked="checked"'; ?>
+                    	style="margin:9px 0;vertical-align:middle">
+					<span style="margin:0 9px;vertical-align:middle"><? _e("Text only"); ?>:</span>
+				</label>
+                <input name="A2A_SHARE_SAVE_button_text" type="text" class="code" size="50" onclick="e=document.getElementsByName('A2A_SHARE_SAVE_button');e[e.length-1].checked=true" style="vertical-align:middle"
+                	value="<?php echo ( trim(get_option('A2A_SHARE_SAVE_button_text')) != '' ) ? get_option('A2A_SHARE_SAVE_button_text') : "Share/Save"; ?>" />
                 
             </fieldset></td>
             </tr>
@@ -265,8 +250,10 @@ function A2A_SHARE_SAVE_options_page() {
             <td><fieldset>
                 <label>
                 	<input name="A2A_SHARE_SAVE_display_in_posts" 
-                    	onclick="e=getElementsByName('A2A_SHARE_SAVE_display_in_posts_on_front_page')[0];if(!this.checked){e.checked=false;e.disabled=true}else{e.checked=true;e.disabled=false}"
-                        onchange="e=getElementsByName('A2A_SHARE_SAVE_display_in_posts_on_front_page')[0];if(!this.checked){e.checked=false;e.disabled=true}else{e.checked=true;e.disabled=false}"
+                    	onclick="e=getElementsByName('A2A_SHARE_SAVE_display_in_posts_on_front_page')[0];f=getElementsByName('A2A_SHARE_SAVE_display_in_feed')[0];
+                        	if(!this.checked){e.checked=false;e.disabled=true; f.checked=false;f.disabled=true}else{e.checked=true;e.disabled=false; f.checked=true;f.disabled=false}"
+                        onchange="e=getElementsByName('A2A_SHARE_SAVE_display_in_posts_on_front_page')[0];f=getElementsByName('A2A_SHARE_SAVE_display_in_feed')[0];
+                        	if(!this.checked){e.checked=false;e.disabled=true; f.checked=false;f.disabled=true}else{e.checked=true;e.disabled=false; f.checked=true;f.disabled=false}"
                         type="checkbox"<?php if(get_option('A2A_SHARE_SAVE_display_in_posts')!='-1') echo ' checked="checked"'; ?> value="1"/>
                 	<? _e('Display Share/Save button at the bottom of posts', 'add-to-any'); ?> <strong>*</strong>
                 </label><br/>
@@ -278,10 +265,16 @@ function A2A_SHARE_SAVE_options_page() {
                     <? _e('Display Share/Save button at the bottom of posts on the front page', 'add-to-any'); ?>
 				</label><br/>
                 <label>
+                	&nbsp; &nbsp; &nbsp; <input name="A2A_SHARE_SAVE_display_in_feed" type="checkbox"<?php 
+						if(get_option('A2A_SHARE_SAVE_display_in_feed')!='-1') echo ' checked="checked"'; 
+						if(get_option('A2A_SHARE_SAVE_display_in_posts')=='-1') echo ' disabled="disabled"';
+						?> value="1"/>
+                    <? _e('Display Share/Save button at the bottom of posts in the feed', 'add-to-any'); ?>
+				</label><br/>
+                <label>
                 	<input name="A2A_SHARE_SAVE_display_in_pages" type="checkbox"<?php if(get_option('A2A_SHARE_SAVE_display_in_pages')!='-1') echo ' checked="checked"'; ?> value="1"/>
                     <? _e('Display Share/Save button at the bottom of pages', 'add-to-any'); ?> <strong>*</strong>
 				</label>
-                
                 <br/><br/>
                 <strong>*</strong> <? _e("If unchecked, be sure to place the following code in <a href=\"theme-editor.php\">your template pages</a> (within <code>index.php</code>, <code>single.php</code>, and/or <code>page.php</code>)", "add-to-any"); ?>:<br/>
                 <code>&lt;?php if( function_exists('ADDTOANY_SHARE_SAVE_BUTTON') ) { ADDTOANY_SHARE_SAVE_BUTTON(); } ?&gt;</code>
