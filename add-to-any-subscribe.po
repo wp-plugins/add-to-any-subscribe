@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: add-to-any-subscribe\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-26 01:55-0800\n"
+"POT-Creation-Date: 2008-10-23 17:17-0800\n"
 "PO-Revision-Date: \n"
 "Last-Translator: MicroPat\n"
 "Language-Team: \n"
@@ -13,158 +13,163 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: add-to-any-subscribe.php:112
+#: add-to-any-subscribe.php:123
 msgid "Share"
 msgstr ""
 
-#: add-to-any-subscribe.php:113
+#: add-to-any-subscribe.php:124
 msgid "Save"
 msgstr ""
 
-#: add-to-any-subscribe.php:114
-#: add-to-any-subscribe.php:355
+#: add-to-any-subscribe.php:125
+#: add-to-any-subscribe.php:384
 msgid "Subscribe"
 msgstr ""
 
-#: add-to-any-subscribe.php:115
+#: add-to-any-subscribe.php:126
 msgid "Show all"
 msgstr ""
 
-#: add-to-any-subscribe.php:116
+#: add-to-any-subscribe.php:127
 msgid "Show less"
 msgstr ""
 
-#: add-to-any-subscribe.php:117
+#: add-to-any-subscribe.php:128
 msgid "Find service(s)"
 msgstr ""
 
-#: add-to-any-subscribe.php:118
+#: add-to-any-subscribe.php:129
 msgid "Instantly find any service to add to"
 msgstr ""
 
-#: add-to-any-subscribe.php:119
+#: add-to-any-subscribe.php:130
 msgid "Powered by"
 msgstr ""
 
-#: add-to-any-subscribe.php:120
+#: add-to-any-subscribe.php:131
 msgid "Share via e-mail"
 msgstr ""
 
-#: add-to-any-subscribe.php:121
+#: add-to-any-subscribe.php:132
 msgid "Subscribe via e-mail"
 msgstr ""
 
-#: add-to-any-subscribe.php:122
+#: add-to-any-subscribe.php:133
 msgid "Bookmark in your browser"
 msgstr ""
 
-#: add-to-any-subscribe.php:123
+#: add-to-any-subscribe.php:134
 msgid "After clicking OK, press Ctrl+D or Cmd+D to bookmark this page"
 msgstr ""
 
-#: add-to-any-subscribe.php:124
+#: add-to-any-subscribe.php:135
 msgid "Add to your favorites"
 msgstr ""
 
-#: add-to-any-subscribe.php:193
-#: add-to-any-subscribe.php:273
+#: add-to-any-subscribe.php:206
+#: add-to-any-subscribe.php:295
 msgid "Image URL"
 msgstr ""
 
-#: add-to-any-subscribe.php:199
+#: add-to-any-subscribe.php:214
+#: add-to-any-subscribe.php:302
+msgid "Text only"
+msgstr ""
+
+#: add-to-any-subscribe.php:220
 msgid "More Settings"
 msgstr ""
 
-#: add-to-any-subscribe.php:225
+#: add-to-any-subscribe.php:247
 msgid "Settings saved."
 msgstr ""
 
-#: add-to-any-subscribe.php:234
+#: add-to-any-subscribe.php:256
 msgid "Add to Any: Subscribe "
 msgstr ""
 
-#: add-to-any-subscribe.php:234
-#: add-to-any-subscribe.php:355
+#: add-to-any-subscribe.php:256
+#: add-to-any-subscribe.php:384
 msgid "Settings"
 msgstr ""
 
-#: add-to-any-subscribe.php:244
+#: add-to-any-subscribe.php:266
 msgid "Button"
 msgstr ""
 
-#: add-to-any-subscribe.php:280
+#: add-to-any-subscribe.php:309
 msgid "Button Placement"
 msgstr ""
 
-#: add-to-any-subscribe.php:282
+#: add-to-any-subscribe.php:311
 msgid "If you are using a widget-ready theme, you can use the <a href=\"widgets.php\">widgets page</a> to place the button where you want in your sidebar."
 msgstr ""
 
-#: add-to-any-subscribe.php:283
+#: add-to-any-subscribe.php:312
 msgid "Open Widgets Panel"
 msgstr ""
 
-#: add-to-any-subscribe.php:284
+#: add-to-any-subscribe.php:313
 msgid "Alternatively, you can place the following code in <a href=\"theme-editor.php\">your template pages</a> (within <code>sidebar.php</code>, <code>index.php</code>, <code>single.php</code>, and/or <code>page.php</code>)"
 msgstr ""
 
-#: add-to-any-subscribe.php:289
+#: add-to-any-subscribe.php:318
 msgid "Menu Style"
 msgstr ""
 
-#: add-to-any-subscribe.php:291
+#: add-to-any-subscribe.php:320
 msgid "Using Add to Any's Menu Styler, you can customize the colors of your Subscribe menu! When you're done, be sure to paste the generated code in the <a href=\"#\" onclick=\"document.getElementById('A2A_SUBSCRIBE_additional_js_variables').focus();return false\">Additional Options</a> box below."
 msgstr ""
 
-#: add-to-any-subscribe.php:293
+#: add-to-any-subscribe.php:322
 msgid "Open the Add to Any Menu Styler in a new window"
 msgstr ""
 
-#: add-to-any-subscribe.php:295
+#: add-to-any-subscribe.php:324
 msgid "Open Menu Styler"
 msgstr ""
 
-#: add-to-any-subscribe.php:300
+#: add-to-any-subscribe.php:329
 msgid "Menu Options"
 msgstr ""
 
-#: add-to-any-subscribe.php:305
+#: add-to-any-subscribe.php:334
 msgid "Hide embedded objects (Flash, video, etc.) that intersect with the menu when displayed"
 msgstr ""
 
-#: add-to-any-subscribe.php:310
+#: add-to-any-subscribe.php:339
 msgid "Show the title of this blog within the menu"
 msgstr ""
 
-#: add-to-any-subscribe.php:315
+#: add-to-any-subscribe.php:344
 msgid "Only show the menu when the user clicks the Subscribe button"
 msgstr ""
 
-#: add-to-any-subscribe.php:320
+#: add-to-any-subscribe.php:349
 msgid "Additional Options"
 msgstr ""
 
-#: add-to-any-subscribe.php:324
+#: add-to-any-subscribe.php:353
 msgid "Paste the code from Add to Any's Menu Styler in the box below!"
 msgstr ""
 
-#: add-to-any-subscribe.php:328
+#: add-to-any-subscribe.php:357
 msgid "Below you can set special JavaScript variables to apply to your Subscribe menu."
 msgstr ""
 
-#: add-to-any-subscribe.php:329
+#: add-to-any-subscribe.php:358
 msgid "Advanced users might want to check out the code generated by Add to Any's general <a href=\"http://www.addtoany.com/buttons/subscribe\">Subscribe button generator</a>."
 msgstr ""
 
-#: add-to-any-subscribe.php:335
+#: add-to-any-subscribe.php:364
 msgid "<strong>Note</strong>: If you're adding new code, be careful not to accidentally overwrite any previous code."
 msgstr ""
 
-#: add-to-any-subscribe.php:342
+#: add-to-any-subscribe.php:371
 msgid "Save Changes"
 msgstr ""
 
-#: add-to-any-subscribe.php:356
+#: add-to-any-subscribe.php:385
 msgid "Subscribe Buttons"
 msgstr ""
 
