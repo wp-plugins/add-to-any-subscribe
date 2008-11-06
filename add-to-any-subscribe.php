@@ -3,7 +3,7 @@
 Plugin Name: Add to Any: Subscribe Button
 Plugin URI: http://www.addtoany.com/buttons/
 Description: Lets readers subscribe to your blog using any feed reader.  [<a href="widgets.php">Settings</a> - on the Widgets page]
-Version: .9.5.1
+Version: .9.5.2
 Author: Add to Any
 Author URI: http://www.addtoany.com/contact/
 */
@@ -78,7 +78,7 @@ class Add_to_Any_Subscribe_Widget {
 		
 		echo $before_widget; ?>
 
-        <a class="a2a_dd addtoany_subscribe" <?php echo (get_option('A2A_SUBSCRIBE_onclick')=='1') ? 'onclick="a2a_show_dropdown(this);return false"' : 'onmouseover="a2a_show_dropdown(this)"'; ?> onmouseout="a2a_onMouseOut_delay()" href="http://www.addtoany.com/subscribe?linkname=<?php echo $feedname_enc; ?>&amp;linkurl=<?php echo $feedurl_enc; ?>"><?php echo $button; ?></a>
+        <a class="a2a_dd addtoany_subscribe" href="http://www.addtoany.com/subscribe?linkname=<?php echo $feedname_enc; ?>&amp;linkurl=<?php echo $feedurl_enc; ?>"><?php echo $button; ?></a>
         <?php echo $after_widget;
 		
 		global $A2A_javascript, $A2A_SUBSCRIBE_external_script_called;
@@ -92,6 +92,7 @@ class Add_to_Any_Subscribe_Widget {
 			. A2A_menu_locale()
 			. 'a2a_linkname="' . js_escape($feedname) . '";' . "\n"
 			. 'a2a_linkurl="' . $feedurl . '";' . "\n"
+			. ((get_option('A2A_SUBSCRIBE_onclick')=='1') ? 'a2a_onclick=1;' . "\n" : '')
 			. ((get_option('A2A_SUBSCRIBE_hide_embeds')=='-1') ? 'a2a_hide_embeds=0;' . "\n" : '')
 			. ((get_option('A2A_SUBSCRIBE_show_title')=='1') ? 'a2a_show_title=1;' . "\n" : '')
 			. stripslashes(get_option('A2A_SUBSCRIBE_additional_js_variables')) . "\n"
