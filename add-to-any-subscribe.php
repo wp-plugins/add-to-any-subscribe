@@ -3,7 +3,7 @@
 Plugin Name: Add to Any: Subscribe Button
 Plugin URI: http://www.addtoany.com/buttons/
 Description: Lets readers subscribe to your blog using any feed reader.  [<a href="widgets.php">Settings</a> - on the Widgets page]
-Version: .9.5.2
+Version: .9.5.3
 Author: Add to Any
 Author URI: http://www.addtoany.com/contact/
 */
@@ -121,19 +121,23 @@ if (!function_exists('A2A_menu_locale')) {
 		global $A2A_locale;
 		if( $A2A_locale != '' ) return false;
 		$A2A_locale = 'a2a_localize = {
-	Share: "' . __("Share", "add-to-any-subscribe") . '",
-	Save: "' . __("Save", "add-to-any-subscribe") . '",
-	Subscribe: "' . __("Subscribe", "add-to-any-subscribe") . '",
-	ShowAll: "' . __("Show all", "add-to-any-subscribe") . '",
-	ShowLess: "' . __("Show less", "add-to-any-subscribe") . '",
-	FindServices: "' . __("Find service(s)", "add-to-any-subscribe") . '",
-	FindAnyServiceToAddTo: "' . __("Instantly find any service to add to", "add-to-any-subscribe") . '",
-	PoweredBy: "' . __("Powered by", "add-to-any-subscribe") . '",
-	ShareViaEmail: "' . __("Share via e-mail", "add-to-any-subscribe") . '",
-	SubscribeViaEmail: "' . __("Subscribe via e-mail", "add-to-any-subscribe") . '",
-	BookmarkInYourBrowser: "' . __("Bookmark in your browser", "add-to-any-subscribe") . '",
-	BookmarkInstructions: "' . __("After clicking OK, press Ctrl+D or Cmd+D to bookmark this page", "add-to-any-subscribe") . '",
-	AddToYourFavorites: "' . __("Add to your favorites", "add-to-any-subscribe") . '"
+	Share: "' . __("Share", "add-to-any") . '",
+	Save: "' . __("Save", "add-to-any") . '",
+	Subscribe: "' . __("Subscribe", "add-to-any") . '",
+	Email: "' . __("E-mail") . '",
+    Bookmark: "' . __("Bookmark") . '",
+	ShowAll: "' . __("Show all", "add-to-any") . '",
+	ShowLess: "' . __("Show less", "add-to-any") . '",
+	FindServices: "' . __("Find service(s)", "add-to-any") . '",
+	FindAnyServiceToAddTo: "' . __("Instantly find any service to add to", "add-to-any") . '",
+	PoweredBy: "' . __("Powered by", "add-to-any") . '",
+	ShareViaEmail: "' . __("Share via e-mail", "add-to-any") . '",
+	SubscribeViaEmail: "' . __("Subscribe via e-mail", "add-to-any") . '",
+	BookmarkInYourBrowser: "' . __("Bookmark in your browser", "add-to-any") . '",
+	BookmarkInstructions: "' . __("Press Ctrl+D or Cmd+D to bookmark this page", "add-to-any") . '",
+	AddToYourFavorites: "' . __("Add to your favorites", "add-to-any") . '"
+	SendFromWebOrProgram: "' . __("Send from any e-mail address or e-mail program") . '",
+    EmailProgram: "' . __("E-mail program") . '"
 };
 ';
 		return $A2A_locale;
