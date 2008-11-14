@@ -82,6 +82,10 @@ This is done to overcome browser limitations that prevent the drop-down menu fro
 
 == Changelog ==
 
+.9.5.4:
+
+* Fixed a small syntax error (critcal if you're on .9.5.3)
+
 .9.5.3:
 
 * Language & localization update
