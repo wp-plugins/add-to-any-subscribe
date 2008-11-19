@@ -4,7 +4,7 @@ Donate link: http://www.addtoany.com/contact/
 Tags: widget, sidebar, rss, plugin, links, feed, feeds, images, button, Post, posts, subscribe, add to any, addtoany, add, any, email, e-mail, Google, My, Yahoo, Mixx, iTunes, Feeds
 Requires at least: 2.2
 Tested up to: 2.7
-Stable tag: 0.9.5.4
+Stable tag: 0.9.5.5
 
 Helps readers subscribe to your blog using any feed reader.
 
@@ -55,7 +55,7 @@ Using the Theme Editor, you can place the following code in your template pages 
 
 = How can I customize the feed of the widget? (Useful for comment feeds, category feeds, etc.) =
 
-This can be done through the template tag (as described above.  Simply supply a feed name and feed URL through the template tag like so:
+This can be done through the template tag (as described above).  Simply supply a feed name and feed URL through the template tag like so:
 
 `<?php if( class_exists('Add_to_Any_Subscribe_Widget') ) {
 	$A2A_SUBSCRIBE_options = array(
@@ -81,6 +81,10 @@ This is done to overcome browser limitations that prevent the drop-down menu fro
 3. This is the drop-down menu showing the services available to the user within the Subscribe menu.  Services are constantly added/updated.
 
 == Changelog ==
+
+.9.5.5:
+
+* Accomodates renamed plugin directory
 
 .9.5.4:
 
