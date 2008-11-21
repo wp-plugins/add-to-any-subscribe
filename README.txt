@@ -84,7 +84,7 @@ This is done to overcome browser limitations that prevent the drop-down menu fro
 
 .9.5.5.1:
 
-* Replaced short form of PHP's open tags with long form to work around setups with short_open_tag disabled
+* Replaced short form of PHP's open tags with long form to work around configurations with short_open_tag disabled
 
 .9.5.5:
 
