@@ -4,22 +4,23 @@ Donate link: http://www.addtoany.com/contact/
 Tags: widget, sidebar, rss, plugin, links, feed, feeds, images, admin, button, Post, posts, subscribe, add to any, addtoany, add, any, email, e-mail, mobile, Google, My, Yahoo, Mixx, iTunes, Feeds
 Requires at least: 2.2
 Tested up to: 2.7
-Stable tag: 0.9.5.5.3
+Stable tag: 0.9.5.5.4
 
 Helps readers subscribe to your blog using any feed reader.
 
 == Description ==
 
-Lets readers **subscribe** to your blog using **any feed reader**, such as Google Reader, My Yahoo!, Netvibes, Pageflakes, and all the rest.  The button comes with Add to Any's customizable Smart Menu, which **places the services visitors use at the top of the menu**, based on each visitor's browsing history.
+Helps readers **subscribe** to your blog using **any feed reader**, such as Google Reader, My Yahoo!, Netvibes, Windows Live, and all the rest.  The button comes with Add to Any's customizable Smart Menu, which **places the services visitors use at the top of the menu**, based on each visitor's browsing history.
 
 * Add to Any Smart Menu
 * Includes all services
 * Services updated automatically
+* WordPress optimized
 * Searchable on key-down
 * Keyboard navigation
-* Google Analytics integration
+* Many more publisher and user features
 
-Demo: <a href="http://www.addtoany.com/" title="Subscribe, Share, Save buttons">http://www.addtoany.com/</a>
+<a href="http://www.addtoany.com/" title="Subscribe button and sharing button">Demo</a> | <a href="other_notes/">Changelog</a>
 
 See also, the <a href="/extend/plugins/add-to-any/">Share/Save/Bookmark button</a> plugin.
 
@@ -53,6 +54,12 @@ Using the Theme Editor, you can place the following code in your template pages 
 
 `<?php Add_to_Any_Subscribe_Widget::display(); ?>`
 
+= Why isn't the drop-down menu appearing? =
+
+It's likely because your your theme wasn't <a href="http://codex.wordpress.org/Theme_Development#Plugin_API_Hooks" target="_blank">coded properly</a>.  Using the Theme Editor, make sure that the following piece of code is included in your theme's `footer.php` file just before the `</body>` line:
+
+`<?php wp_footer(); ?>`
+
 = How can I customize the feed of the widget? (Useful for comment feeds, category feeds, etc.) =
 
 This can be done through the template tag (as described above).  Simply supply a feed name and feed URL through the template tag like so:
@@ -63,12 +70,6 @@ This can be done through the template tag (as described above).  Simply supply a
 		"feedurl" => "http://www.example.com/feed");
 	Add_to_Any_Subscribe_Widget::display( $A2A_SUBSCRIBE_options );
 } ?>`
-
-= Why isn't the drop-down menu appearing? =
-
-It's likely because your your theme wasn't <a href="http://codex.wordpress.org/Theme_Development#Plugin_API_Hooks" target="_blank">coded properly</a>.  Using the Theme Editor, make sure that the following piece of code is included in your theme's `footer.php` file just before the `</body>` line:
-
-`<?php wp_footer(); ?>`
 
 = Why do embedded objects (like Flash) disappear when the menu is displayed? =
 
@@ -81,6 +82,12 @@ This is done to overcome browser limitations that prevent the drop-down menu fro
 3. This is the drop-down menu showing the services available to the user within the Subscribe menu.  Services are constantly added/updated.
 
 == Changelog ==
+
+.9.5.5.4:
+
+* WordPress 2.7 admin styling
+* Settings link on Plugins page
+* Basename var
 
 .9.5.5.3:
 

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: add-to-any-subscribe\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-27 14:13-0800\n"
+"POT-Creation-Date: 2008-12-09 21:23-0800\n"
 "PO-Revision-Date: \n"
 "Last-Translator: MicroPat\n"
 "Language-Team: \n"
@@ -13,183 +13,183 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: add-to-any-subscribe.php:126
+#: add-to-any-subscribe.php:130
 msgid "Share"
 msgstr ""
 
-#: add-to-any-subscribe.php:127
+#: add-to-any-subscribe.php:131
 msgid "Save"
 msgstr ""
 
-#: add-to-any-subscribe.php:128
-#: add-to-any-subscribe.php:400
+#: add-to-any-subscribe.php:132
+#: add-to-any-subscribe.php:408
 msgid "Subscribe"
 msgstr ""
 
-#: add-to-any-subscribe.php:129
+#: add-to-any-subscribe.php:133
 msgid "E-mail"
 msgstr ""
 
-#: add-to-any-subscribe.php:130
+#: add-to-any-subscribe.php:134
 msgid "Bookmark"
 msgstr ""
 
-#: add-to-any-subscribe.php:131
+#: add-to-any-subscribe.php:135
 msgid "Show all"
 msgstr ""
 
-#: add-to-any-subscribe.php:132
+#: add-to-any-subscribe.php:136
 msgid "Show less"
 msgstr ""
 
-#: add-to-any-subscribe.php:133
+#: add-to-any-subscribe.php:137
 msgid "Find service(s)"
 msgstr ""
 
-#: add-to-any-subscribe.php:134
+#: add-to-any-subscribe.php:138
 msgid "Instantly find any service to add to"
 msgstr ""
 
-#: add-to-any-subscribe.php:135
+#: add-to-any-subscribe.php:139
 msgid "Powered by"
 msgstr ""
 
-#: add-to-any-subscribe.php:136
+#: add-to-any-subscribe.php:140
 msgid "Share via e-mail"
 msgstr ""
 
-#: add-to-any-subscribe.php:137
+#: add-to-any-subscribe.php:141
 msgid "Subscribe via e-mail"
 msgstr ""
 
-#: add-to-any-subscribe.php:138
+#: add-to-any-subscribe.php:142
 msgid "Bookmark in your browser"
 msgstr ""
 
-#: add-to-any-subscribe.php:139
+#: add-to-any-subscribe.php:143
 msgid "Press Ctrl+D or Cmd+D to bookmark this page"
 msgstr ""
 
-#: add-to-any-subscribe.php:140
+#: add-to-any-subscribe.php:144
 msgid "Add to your favorites"
 msgstr ""
 
-#: add-to-any-subscribe.php:141
+#: add-to-any-subscribe.php:145
 msgid "Send from any e-mail address or e-mail program"
 msgstr ""
 
-#: add-to-any-subscribe.php:142
+#: add-to-any-subscribe.php:146
 msgid "E-mail program"
 msgstr ""
 
-#: add-to-any-subscribe.php:213
-#: add-to-any-subscribe.php:303
+#: add-to-any-subscribe.php:219
+#: add-to-any-subscribe.php:311
 msgid "Image URL"
 msgstr ""
 
-#: add-to-any-subscribe.php:221
-#: add-to-any-subscribe.php:310
+#: add-to-any-subscribe.php:227
+#: add-to-any-subscribe.php:318
 msgid "Text only"
 msgstr ""
 
-#: add-to-any-subscribe.php:227
+#: add-to-any-subscribe.php:233
 msgid "More Settings"
 msgstr ""
 
-#: add-to-any-subscribe.php:255
+#: add-to-any-subscribe.php:263
 msgid "Settings saved."
 msgstr ""
 
-#: add-to-any-subscribe.php:264
+#: add-to-any-subscribe.php:272
 msgid "Add to Any: Subscribe "
 msgstr ""
 
-#: add-to-any-subscribe.php:264
-#: add-to-any-subscribe.php:400
+#: add-to-any-subscribe.php:272
+#: add-to-any-subscribe.php:408
 msgid "Settings"
 msgstr ""
 
-#: add-to-any-subscribe.php:274
+#: add-to-any-subscribe.php:282
 msgid "Button"
 msgstr ""
 
-#: add-to-any-subscribe.php:317
+#: add-to-any-subscribe.php:325
 msgid "Button Placement"
 msgstr ""
 
-#: add-to-any-subscribe.php:319
+#: add-to-any-subscribe.php:327
 msgid "If you are using a widget-ready theme, you can use the <a href=\"widgets.php\">widgets page</a> to place the button where you want in your sidebar."
 msgstr ""
 
-#: add-to-any-subscribe.php:320
+#: add-to-any-subscribe.php:328
 msgid "Open Widgets Panel"
 msgstr ""
 
-#: add-to-any-subscribe.php:321
+#: add-to-any-subscribe.php:329
 msgid "Alternatively, you can place the following code in <a href=\"theme-editor.php\">your template pages</a> (within <code>sidebar.php</code>, <code>index.php</code>, <code>single.php</code>, and/or <code>page.php</code>)"
 msgstr ""
 
-#: add-to-any-subscribe.php:326
+#: add-to-any-subscribe.php:334
 msgid "Menu Style"
 msgstr ""
 
-#: add-to-any-subscribe.php:328
+#: add-to-any-subscribe.php:336
 msgid "Using Add to Any's Menu Styler, you can customize the colors of your Subscribe menu! When you're done, be sure to paste the generated code in the <a href=\"#\" onclick=\"document.getElementById('A2A_SUBSCRIBE_additional_js_variables').focus();return false\">Additional Options</a> box below."
 msgstr ""
 
-#: add-to-any-subscribe.php:330
+#: add-to-any-subscribe.php:338
 msgid "Open the Add to Any Menu Styler in a new window"
 msgstr ""
 
-#: add-to-any-subscribe.php:332
+#: add-to-any-subscribe.php:340
 msgid "Open Menu Styler"
 msgstr ""
 
-#: add-to-any-subscribe.php:337
+#: add-to-any-subscribe.php:345
 msgid "Menu Options"
 msgstr ""
 
-#: add-to-any-subscribe.php:342
+#: add-to-any-subscribe.php:350
 msgid "Hide embedded objects (Flash, video, etc.) that intersect with the menu when displayed"
 msgstr ""
 
-#: add-to-any-subscribe.php:347
+#: add-to-any-subscribe.php:355
 msgid "Show the title of this blog within the menu"
 msgstr ""
 
-#: add-to-any-subscribe.php:354
+#: add-to-any-subscribe.php:362
 msgid "Only show the menu when the user clicks the Subscribe button"
 msgstr ""
 
-#: add-to-any-subscribe.php:360
+#: add-to-any-subscribe.php:368
 msgid "Open the addtoany.com menu page in a new tab or window if the user clicks the Subscribe button"
 msgstr ""
 
-#: add-to-any-subscribe.php:365
+#: add-to-any-subscribe.php:373
 msgid "Additional Options"
 msgstr ""
 
-#: add-to-any-subscribe.php:369
+#: add-to-any-subscribe.php:377
 msgid "Paste the code from Add to Any's Menu Styler in the box below!"
 msgstr ""
 
-#: add-to-any-subscribe.php:373
+#: add-to-any-subscribe.php:381
 msgid "Below you can set special JavaScript variables to apply to your Subscribe menu."
 msgstr ""
 
-#: add-to-any-subscribe.php:374
+#: add-to-any-subscribe.php:382
 msgid "Advanced users might want to check out the code generated by Add to Any's <a href=\"http://www.addtoany.com/buttons/api/\">JavaScript API</a>."
 msgstr ""
 
-#: add-to-any-subscribe.php:380
+#: add-to-any-subscribe.php:388
 msgid "<strong>Note</strong>: If you're adding new code, be careful not to accidentally overwrite any previous code."
 msgstr ""
 
-#: add-to-any-subscribe.php:387
+#: add-to-any-subscribe.php:395
 msgid "Save Changes"
 msgstr ""
 
-#: add-to-any-subscribe.php:401
+#: add-to-any-subscribe.php:409
 msgid "Subscribe Buttons"
 msgstr ""
 
