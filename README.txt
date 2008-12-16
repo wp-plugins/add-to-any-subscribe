@@ -4,7 +4,7 @@ Donate link: http://www.addtoany.com/contact/
 Tags: widget, sidebar, rss, plugin, links, feed, feeds, images, admin, button, Post, posts, subscribe, add to any, addtoany, add, any, email, e-mail, mobile, Google, My, Yahoo, Mixx, iTunes, Feeds
 Requires at least: 2.2
 Tested up to: 2.7
-Stable tag: 0.9.5.5.4
+Stable tag: 0.9.5.5.5
 
 Helps readers subscribe to your blog using any feed reader.
 
@@ -26,7 +26,7 @@ See also, the <a href="/extend/plugins/add-to-any/">Share/Save/Bookmark button</
 
 == Installation ==
 
-1. Upload `add-to-any-subscribe` to the `/wp-content/plugins/` directory
+1. Upload the `add-to-any-subscribe` directory (including all files within) to the `/wp-content/plugins/` directory
 1. Activate the plugin through the `Plugins` menu in WordPress
 1. Go to `Presentation` -> `Widgets` and click `Add` next to "Add to Any Subscribe"
 
@@ -82,6 +82,12 @@ This is done to overcome browser limitations that prevent the drop-down menu fro
 3. This is the drop-down menu showing the services available to the user within the Subscribe menu.  Services are constantly added/updated.
 
 == Changelog ==
+
+.9.5.5.5:
+
+* i18n
+* Chinese translation
+* Installation clarified
 
 .9.5.5.4:
 
