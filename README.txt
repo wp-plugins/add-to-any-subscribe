@@ -4,7 +4,7 @@ Donate link: http://www.addtoany.com/contact/
 Tags: widget, sidebar, rss, plugin, links, feed, feeds, images, admin, button, Post, posts, subscribe, add to any, addtoany, add, any, email, e-mail, mobile, Google, My, Yahoo, Mixx, iTunes, Feeds
 Requires at least: 2.2
 Tested up to: 2.7
-Stable tag: 0.9.5.5.6
+Stable tag: 0.9.6
 
 Helps readers subscribe to your blog using any feed reader or feed emailer.
 
@@ -82,6 +82,11 @@ This is done to overcome browser limitations that prevent the drop-down menu fro
 3. This is the drop-down menu showing the services available to the user within the Subscribe menu.  Services are constantly added/updated.
 
 == Changelog ==
+
+.9.6:
+
+* Widget title option
+* Text-only button stripslashes
 
 .9.5.5.6:
 
