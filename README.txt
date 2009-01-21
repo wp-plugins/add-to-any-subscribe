@@ -4,18 +4,18 @@ Donate link: http://www.addtoany.com/contact/
 Tags: widget, sidebar, rss, plugin, links, feed, feeds, images, admin, button, Post, posts, subscribe, add to any, addtoany, add, any, email, e-mail, mobile, Google, My, Yahoo, Mixx, iTunes, Feeds
 Requires at least: 2.2
 Tested up to: 2.7
-Stable tag: 0.9.6
+Stable tag: 0.9.6.1
 
 Helps readers subscribe to your blog using any feed reader or feed emailer.
 
 == Description ==
 
-Helps readers **subscribe** to your blog using **any feed reader**, such as Google Reader, My Yahoo!, Netvibes, Windows Live, and all the rest.  The button comes with Add to Any's customizable Smart Menu, which **places the services visitors use at the top of the menu**, based on each visitor's browsing history.
+Helps readers **subscribe** to your blog using **any feed reader**, such as Google Reader, My Yahoo!, Netvibes, Windows Live, and all other RSS readers.  The button comes with Add to Any's customizable Smart Menu, which **places the services visitors use at the top of the menu**, based on each visitor's browsing history.
 
-* Add to Any Smart Menu
+* Add to Any <a href="http://www.addtoany.com/blog/smart-menus-the-services-your-visitors-use-displayed-first/" target="_blank">Smart Menu</a>
 * Includes all services
 * Services updated automatically
-* WordPress optimized
+* WordPress optimized, localized (i18n)
 * Searchable on key-down
 * Keyboard navigation
 * Many more publisher and user features
@@ -82,6 +82,11 @@ This is done to overcome browser limitations that prevent the drop-down menu fro
 3. This is the drop-down menu showing the services available to the user within the Subscribe menu.  Services are constantly added/updated.
 
 == Changelog ==
+
+.9.6.1:
+
+* Additional options / JavaScript API clarification
+* i18n update 
 
 .9.6:
 
