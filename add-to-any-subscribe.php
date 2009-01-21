@@ -3,7 +3,7 @@
 Plugin Name: Add to Any: Subscribe Button
 Plugin URI: http://www.addtoany.com/buttons/
 Description: Helps readers subscribe to your blog using any feed reader.  [<a href="widgets.php">Enable Widget</a> | <a href="options-general.php?page=add-to-any-subscribe.php">Settings</a>]
-Version: .9.6.1
+Version: .9.6.2
 Author: Add to Any
 Author URI: http://www.addtoany.com/contact/
 */
@@ -393,7 +393,7 @@ function A2A_SUBSCRIBE_options_page() {
                     </p>
                     <label for="A2A_SUBSCRIBE_additional_js_variables">
                     	<p><?php _e("Below you can set special JavaScript variables to apply to your Subscribe menu.", "add-to-any-subscribe"); ?>
-                    	<?php _e("Advanced users might want to explore Add to Any's <a href=\"http://www.addtoany.com/buttons/api/\" target="_blank">JavaScript API</a>.", "add-to-any-subscribe"); ?></p>
+                    	<?php _e("Advanced users might want to explore Add to Any's <a href=\"http://www.addtoany.com/buttons/api/\" target=\"_blank\">JavaScript API</a>.", "add-to-any-subscribe"); ?></p>
 					</label>
                     <p>
                 		<textarea name="A2A_SUBSCRIBE_additional_js_variables" id="A2A_SUBSCRIBE_additional_js_variables" class="code" style="width: 98%; font-size: 12px;" rows="5" cols="50"><?php echo stripslashes(get_option('A2A_SUBSCRIBE_additional_js_variables')); ?></textarea>

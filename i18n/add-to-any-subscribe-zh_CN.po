@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: add-to-any-subscribe\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-20 18:27-0800\n"
+"POT-Creation-Date: 2009-01-20 19:30-0800\n"
 "PO-Revision-Date: \n"
 "Last-Translator: MicroPat\n"
 "Language-Team: \n"
@@ -186,7 +186,7 @@ msgstr "您可以设置特殊 JavaScript 变量以应用于全部 订阅 菜单�
 
 #: add-to-any-subscribe.php:396
 #, fuzzy
-msgid "Advanced users might want to explore Add to Any's <a href=\"http://www.addtoany.com/buttons/api/\" target="
+msgid "Advanced users might want to explore Add to Any's <a href=\"http://www.addtoany.com/buttons/api/\" target=\"_blank\">JavaScript API</a>."
 msgstr "高级用户可能希望尝试 Add to Any 的 <a href=\"http://www.addtoany.com/buttons/api/\">JavaScript API</a> 所生成的代码。"
 
 #: add-to-any-subscribe.php:402
