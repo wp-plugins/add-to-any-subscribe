@@ -3,8 +3,8 @@ Contributors: micropat
 Donate link: http://www.addtoany.com/contact/
 Tags: widget, sidebar, rss, plugin, links, feed, feeds, images, admin, button, Post, posts, subscribe, add to any, addtoany, add, any, email, e-mail, mobile, Google, My, Yahoo, Mixx, iTunes, Feeds
 Requires at least: 2.2
-Tested up to: 2.7
-Stable tag: 0.9.6.2
+Tested up to: 2.7.1
+Stable tag: 0.9.6.2.1
 
 Helps readers subscribe to your blog using any feed reader or feed emailer.
 
@@ -15,12 +15,12 @@ Helps readers **subscribe** to your blog using **any feed reader**, such as Goog
 * Add to Any <a href="http://www.addtoany.com/blog/smart-menus-the-services-your-visitors-use-displayed-first/" target="_blank">Smart Menu</a>
 * Includes all services
 * Services updated automatically
-* WordPress optimized, localized (i18n)
+* WordPress optimized, localized (i18n for English, Chinese, Danish)
 * Searchable on key-down
 * Keyboard navigation
 * Many more publisher and user features
 
-<a href="http://www.addtoany.com/" title="Subscribe button and sharing button">Demo</a> | <a href="other_notes/">Changelog</a>
+<a href="http://www.addtoany.com/" title="Subscribe button and share button" target="_blank">Subscribe Button Demo</a> | <a href="other_notes/">Changelog</a>
 
 See also, the <a href="/extend/plugins/add-to-any/">Share/Save/Bookmark button</a> plugin.
 
@@ -40,6 +40,12 @@ Constantly.
 
 Go to `Settings` > `Subscribe Buttons`. 
 
+= Why isn't the drop-down menu appearing for the button? =
+
+It's likely because your your theme wasn't <a href="http://codex.wordpress.org/Theme_Development#Plugin_API_Hooks" target="_blank">coded properly</a>.  Using the Theme Editor, make sure that the following piece of code is included in your theme's `footer.php` file just before the `</body>` line:
+
+`<?php wp_footer(); ?>`
+
 = How come the widget doesn't display once I activate it? =
 
 You'll have to manually put it where you want it in your sidebar.  You can do so by going to `Presentation` > `Widgets` and clicking `Add` next to "Add to Any Subscribe".  You'll need to have a "widget ready" theme.
@@ -53,12 +59,6 @@ Also, be sure to deactivate any previous versions of the widget in the `Plugins`
 Using the Theme Editor, you can place the following code in your template pages (within sidebar.php, index.php, single.php, and/or page.php):
 
 `<?php Add_to_Any_Subscribe_Widget::display(); ?>`
-
-= Why isn't the drop-down menu appearing? =
-
-It's likely because your your theme wasn't <a href="http://codex.wordpress.org/Theme_Development#Plugin_API_Hooks" target="_blank">coded properly</a>.  Using the Theme Editor, make sure that the following piece of code is included in your theme's `footer.php` file just before the `</body>` line:
-
-`<?php wp_footer(); ?>`
 
 = How can I customize the feed of the widget? (Useful for comment feeds, category feeds, etc.) =
 
@@ -82,6 +82,12 @@ This is done to overcome browser limitations that prevent the drop-down menu fro
 3. This is the drop-down menu showing the services available to the user within the Subscribe menu.  Services are constantly added/updated.
 
 == Changelog ==
+
+.9.6.2.1:
+
+* Highlight admin notices
+* Danish translation
+* FAQ
 
 .9.6.2:
 
