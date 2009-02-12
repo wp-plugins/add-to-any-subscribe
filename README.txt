@@ -86,7 +86,7 @@ This is done to overcome browser limitations that prevent the drop-down menu fro
 .9.6.2.1:
 
 * Highlight admin notices
-* Danish translation
+* Danish translation (by <a href="http://wordpress.blogos.dk/" target="_blank">Georg</a>)
 * FAQ
 
 .9.6.2:
