@@ -58,7 +58,7 @@ Also, be sure to deactivate any previous versions of the widget in the `Plugins`
 
 Using the Theme Editor, you can place the following code in your template pages (within sidebar.php, index.php, single.php, and/or page.php):
 
-`<?php Add_to_Any_Subscribe_Widget::display(); ?>`
+`<?php if( class_exists('Add_to_Any_Subscribe_Widget') ) { Add_to_Any_Subscribe_Widget::display(); } ?>`
 
 = How can I customize the feed of the widget? (Useful for comment feeds, category feeds, etc.) =
 
