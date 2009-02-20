@@ -3,7 +3,7 @@
 Plugin Name: Add to Any: Subscribe Button
 Plugin URI: http://www.addtoany.com/buttons/
 Description: Helps readers subscribe to your blog using any feed reader.  [<a href="widgets.php">Enable Widget</a> | <a href="options-general.php?page=add-to-any-subscribe.php">Settings</a>]
-Version: .9.6.2.1
+Version: .9.6.2.2
 Author: Add to Any
 Author URI: http://www.addtoany.com/contact/
 */
@@ -285,7 +285,7 @@ function A2A_SUBSCRIBE_options_page() {
 
 	<h2><?php _e( 'Add to Any: Subscribe ', 'add-to-any-subscribe' ) . _e( 'Settings' ); ?></h2>
 
-    <form method="post" action="<?php echo str_replace( '%7E', '~', $_SERVER['REQUEST_URI']); ?>">
+    <form method="post" action="">
     
 	<?php wp_nonce_field('update-options'); ?>
     
