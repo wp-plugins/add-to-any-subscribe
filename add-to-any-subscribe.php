@@ -3,7 +3,7 @@
 Plugin Name: Add to Any: Subscribe Button
 Plugin URI: http://www.addtoany.com/buttons/
 Description: Helps readers subscribe to your blog using any feed reader.  [<a href="widgets.php">Enable Widget</a> | <a href="options-general.php?page=add-to-any-subscribe.php">Settings</a>]
-Version: .9.6.2.2
+Version: .9.6.3
 Author: Add to Any
 Author URI: http://www.addtoany.com/contact/
 */
@@ -157,6 +157,29 @@ if (!function_exists('A2A_menu_locale')) {
 	}
 }
 
+if (!function_exists('A2A_wp_footer_check')) {
+	function A2A_wp_footer_check()
+	{
+		// If footer.php exists in the current theme, scan for "wp_footer"
+		$file = get_template_directory() . '/footer.php';
+		if( is_file($file) ) {
+			$search_string = "wp_footer";
+			$file_lines = @file($file);
+			
+			foreach($file_lines as $line) {
+				$searchCount = substr_count($line, $search_string);
+				if($searchCount > 0) {
+					return true;
+					break;
+				}
+			}
+			
+			// wp_footer() not found:
+			echo "<div class=\"plugin-update\">" . __("Your theme needs to be fixed. To fix your theme, use the <a href=\"theme-editor.php\">Theme Editor</a> to insert <code>&lt;?php wp_footer(); ?&gt;</code> just before the <code>&lt;/body&gt;</code> line of your theme's <code>footer.php</code> file.") . "</div>";
+		}
+	}  
+}
+
 
 function A2A_SUBSCRIBE_button_css() {
 	?><style type="text/css">.addtoany_subscribe img{border:0;}</style>
@@ -280,6 +303,8 @@ function A2A_SUBSCRIBE_options_page() {
     }
 
     ?>
+    
+    <?php A2A_wp_footer_check(); ?>
     
     <div class="wrap">
 

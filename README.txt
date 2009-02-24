@@ -4,7 +4,7 @@ Donate link: http://www.addtoany.com/contact/
 Tags: widget, sidebar, rss, plugin, links, feed, feeds, images, admin, button, Post, posts, subscribe, add to any, addtoany, add, any, email, e-mail, mobile, Google, My, Yahoo, Mixx, iTunes, Feeds
 Requires at least: 2.2
 Tested up to: 2.7.1
-Stable tag: 0.9.6.2.2
+Stable tag: 0.9.6.3
 
 Helps readers subscribe to your blog using any feed reader or feed emailer.
 
@@ -20,7 +20,7 @@ Helps readers **subscribe** to your blog using **any feed reader**, such as Goog
 * Keyboard navigation
 * Many more publisher and user features
 
-<a href="http://www.addtoany.com/" title="Subscribe button and share button" target="_blank">Subscribe Button Demo</a> | <a href="other_notes/">Changelog</a>
+<a href="http://www.addtoany.com/" title="Subscribe button and share button" target="_blank">Subscribe Button</a> (demo) | <a href="other_notes/">Changelog</a>
 
 See also, the <a href="/extend/plugins/add-to-any/">Share/Save/Bookmark button</a> plugin.
 
@@ -82,6 +82,11 @@ This is done to overcome browser limitations that prevent the drop-down menu fro
 3. This is the drop-down menu showing the services available to the user within the Subscribe menu.  Services are constantly added/updated.
 
 == Changelog ==
+
+.9.6.3:
+
+* wp_footer() detection
+* Replaced short form of PHP's open tags with long form to work around configurations with shortopentag disabled
 
 .9.6.2.2:
 
