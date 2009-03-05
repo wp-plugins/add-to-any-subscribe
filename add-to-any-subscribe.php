@@ -3,7 +3,7 @@
 Plugin Name: Add to Any: Subscribe Button
 Plugin URI: http://www.addtoany.com/buttons/
 Description: Helps readers subscribe to your blog using any feed reader.  [<a href="widgets.php">Enable Widget</a> | <a href="options-general.php?page=add-to-any-subscribe.php">Settings</a>]
-Version: .9.6.3
+Version: .9.6.4
 Author: Add to Any
 Author URI: http://www.addtoany.com/contact/
 */
@@ -19,8 +19,8 @@ $A2A_SUBSCRIBE_plugin_basename = plugin_basename(__FILE__);
 function A2A_SUBSCRIBE_textdomain() {
 	global $A2A_SUBSCRIBE_plugin_basename;
 	load_plugin_textdomain('add-to-any-subscribe',
-		PLUGINDIR.'/'.dirname($A2A_SUBSCRIBE_plugin_basename),
-		dirname($A2A_SUBSCRIBE_plugin_basename));
+		PLUGINDIR.'/'.dirname($A2A_SHARE_SAVE_plugin_basename).'/i18n',
+		dirname($A2A_SHARE_SAVE_plugin_basename).'/i18n');
 }
 add_action('init', 'A2A_SUBSCRIBE_textdomain');
 
