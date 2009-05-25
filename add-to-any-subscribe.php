@@ -3,7 +3,7 @@
 Plugin Name: Add to Any: Subscribe Button
 Plugin URI: http://www.addtoany.com/buttons/
 Description: Helps readers subscribe to your blog using any feed reader.  [<a href="widgets.php">Enable Widget</a> | <a href="options-general.php?page=add-to-any-subscribe.php">Settings</a>]
-Version: .9.6.4.1
+Version: .9.6.5
 Author: Add to Any
 Author URI: http://www.addtoany.com/contact/
 */
@@ -14,13 +14,30 @@ if( !isset($A2A_javascript) )
 if( !isset($A2A_locale) )
 	$A2A_locale = '';
 
-$A2A_SUBSCRIBE_plugin_basename = plugin_basename(__FILE__);
+// WordPress MU?
+if ( basename(dirname(__FILE__)) == "mu-plugins" )
+	$A2A_wpmu = TRUE;
+else
+	$A2A_wpmu = FALSE;
+
+// Pre-2.6 compatibility
+if ( !defined('WP_CONTENT_URL') )
+    define( 'WP_CONTENT_URL', get_option('siteurl') . '/wp-content');
+if ( ! defined( 'WP_PLUGIN_URL' ) )
+      define( 'WP_PLUGIN_URL', WP_CONTENT_URL. '/plugins' );
+
+$A2A_SUBSCRIBE_plugin_basename = plugin_basename(dirname(__FILE__));
+
+if ( $A2A_wpmu )
+	$A2A_SUBSCRIBE_plugin_url_path = WPMU_PLUGIN_URL.'/add-to-any-subscribe';
+else
+	$A2A_SUBSCRIBE_plugin_url_path = WP_PLUGIN_URL.'/'.$A2A_SUBSCRIBE_plugin_basename; // /wp-content/plugins/add-to-any-subscribe
 
 function A2A_SUBSCRIBE_textdomain() {
-	global $A2A_SUBSCRIBE_plugin_basename;
+	global $A2A_SUBSCRIBE_plugin_url_path, $A2A_SUBSCRIBE_plugin_basename;
 	load_plugin_textdomain('add-to-any-subscribe',
-		PLUGINDIR.'/'.dirname($A2A_SHARE_SAVE_plugin_basename).'/i18n',
-		dirname($A2A_SHARE_SAVE_plugin_basename).'/i18n');
+		$A2A_SUBSCRIBE_plugin_url_path.'/languages',
+		$A2A_SUBSCRIBE_plugin_basename.'/languages');
 }
 add_action('init', 'A2A_SUBSCRIBE_textdomain');
 
@@ -47,7 +64,7 @@ class Add_to_Any_Subscribe_Widget {
 
 	function display( $args = false ) {
 	
-		global $A2A_SUBSCRIBE_plugin_basename;
+		global $A2A_SUBSCRIBE_plugin_url_path;
 		
 		if( $args )
 			extract( $args );
@@ -64,7 +81,7 @@ class Add_to_Any_Subscribe_Widget {
 			$button_fname	= 'subscribe_120_16.png';
 			$button_width	= ' width="120"';
 			$button_height	= ' height="16"';
-			$button_src		= trailingslashit(get_option('siteurl')).PLUGINDIR.'/'.dirname($A2A_SUBSCRIBE_plugin_basename).'/'.$button_fname;
+			$button_src		= $A2A_SUBSCRIBE_plugin_url_path.'/'.$button_fname;
 		} else if( get_option('A2A_SUBSCRIBE_button') == 'CUSTOM' ) {
 			$button_src		= get_option('A2A_SUBSCRIBE_button_custom');
 			$button_width	= '';
@@ -76,7 +93,7 @@ class Add_to_Any_Subscribe_Widget {
 			$button_fname	= $button_attrs[0];
 			$button_width	= ' width="'.$button_attrs[1].'"';
 			$button_height	= ' height="'.$button_attrs[2].'"';
-			$button_src		= trailingslashit(get_option('siteurl')).PLUGINDIR.'/'.dirname($A2A_SUBSCRIBE_plugin_basename).'/'.$button_fname;
+			$button_src		= $A2A_SUBSCRIBE_plugin_url_path.'/'.$button_fname;
 		}
 		if( $button_text ) {
 			$button			= $button_text;
@@ -199,7 +216,7 @@ add_action('wp_head', 'A2A_SUBSCRIBE_button_css');
 // This function outputs the options control panel under the admin screen.
 function A2A_SUBSCRIBE_options_widget() {
 
-	global $A2A_SUBSCRIBE_plugin_basename;
+	global $A2A_SUBSCRIBE_plugin_url_path;
 	
 	if( $_POST[ 'A2A_SUBSCRIBE_submit_hidden' ] == 'Y' ) {
 
@@ -230,25 +247,25 @@ function A2A_SUBSCRIBE_options_widget() {
     <p>
     	<label>
         	<input class="radio" type="radio"<?php echo $subscribe_16_16; ?> name="A2A_SUBSCRIBE_button" value="subscribe_16_16.png|16|16" style="vertical-align:middle" />
-    		<img src="<?php echo trailingslashit(get_option('siteurl')).PLUGINDIR.'/'.dirname($A2A_SUBSCRIBE_plugin_basename).'/subscribe_16_16.png'; ?>" width="16" height="16" border="0" style="vertical-align:middle" />
+    		<img src="<?php echo $A2A_SUBSCRIBE_plugin_url_path.'/subscribe_16_16.png'; ?>" width="16" height="16" border="0" style="vertical-align:middle" />
 		</label>
 	</p>
     <p>
     	<label>
         	<input class="radio" type="radio"<?php echo $subscribe_120_16; ?> name="A2A_SUBSCRIBE_button" value="subscribe_120_16.png|120|16" style="vertical-align:middle" />
-    		<img src="<?php echo trailingslashit(get_option('siteurl')).PLUGINDIR.'/'.dirname($A2A_SUBSCRIBE_plugin_basename).'/subscribe_120_16.png'; ?>" width="120" height="16" border="0" style="vertical-align:middle" />
+    		<img src="<?php echo $A2A_SUBSCRIBE_plugin_url_path.'/subscribe_120_16.png'; ?>" width="120" height="16" border="0" style="vertical-align:middle" />
 		</label>
 	</p>
     <p>
     	<label>
         	<input class="radio" type="radio"<?php echo $subscribe_171_16; ?> name="A2A_SUBSCRIBE_button" value="subscribe_171_16.png|171|16" style="vertical-align:middle" />
-    		<img src="<?php echo trailingslashit(get_option('siteurl')).PLUGINDIR.'/'.dirname($A2A_SUBSCRIBE_plugin_basename).'/subscribe_171_16.png'; ?>" width="171" height="16" border="0" style="vertical-align:middle" />
+    		<img src="<?php echo $A2A_SUBSCRIBE_plugin_url_path.'/subscribe_171_16.png'; ?>" width="171" height="16" border="0" style="vertical-align:middle" />
 		</label>
 	</p>
     <p>
     	<label>
         	<input class="radio" type="radio"<?php echo $subscribe_256_24; ?> name="A2A_SUBSCRIBE_button" value="subscribe_256_24.png|256|24" style="vertical-align:middle" />
-    		<img src="<?php echo trailingslashit(get_option('siteurl')).PLUGINDIR.'/'.dirname($A2A_SUBSCRIBE_plugin_basename).'/subscribe_256_24.png'; ?>" width="256" height="24" border="0" style="vertical-align:middle" />
+    		<img src="<?php echo $A2A_SUBSCRIBE_plugin_url_path.'/subscribe_256_24.png'; ?>" width="256" height="24" border="0" style="vertical-align:middle" />
 		</label>
 	</p>
     <p>
@@ -284,7 +301,7 @@ function A2A_SUBSCRIBE_options_widget() {
 
 function A2A_SUBSCRIBE_options_page() {
 
-	global $A2A_SUBSCRIBE_plugin_basename;
+	global $A2A_SUBSCRIBE_plugin_url_path;
 
     if( $_POST[ 'A2A_SUBSCRIBE_submit_hidden' ] == 'Y' ) {
 
@@ -324,25 +341,25 @@ function A2A_SUBSCRIBE_options_page() {
             	<label>
                 	<input name="A2A_SUBSCRIBE_button" value="subscribe_16_16.png|16|16" type="radio"<?php if(get_option('A2A_SUBSCRIBE_button')=='subscribe_16_16.png|16|16') echo ' checked="checked"'; ?>
                     	 style="margin:9px 0;vertical-align:middle">
-                    <img src="<?php echo trailingslashit(get_option('siteurl')).PLUGINDIR.'/'.dirname($A2A_SUBSCRIBE_plugin_basename).'/subscribe_16_16.png'; ?>" width="16" height="16" border="0" style="padding:9px;vertical-align:middle" alt="+ Subscribe" title="+ Subscribe"
+                    <img src="<?php echo $A2A_SUBSCRIBE_plugin_url_path.'/subscribe_16_16.png'; ?>" width="16" height="16" border="0" style="padding:9px;vertical-align:middle" alt="+ Subscribe" title="+ Subscribe"
                     	onclick="this.parentNode.firstChild.checked=true"/>
                 </label><br>
                 <label>
                 	<input name="A2A_SUBSCRIBE_button" value="subscribe_120_16.png|120|16" type="radio"<?php if( !get_option('A2A_SUBSCRIBE_button') || get_option('A2A_SUBSCRIBE_button' )=='subscribe_120_16.png|120|16' ) echo ' checked="checked"'; ?>
                     	style="margin:9px 0;vertical-align:middle">
-                    <img src="<?php echo trailingslashit(get_option('siteurl')).PLUGINDIR.'/'.dirname($A2A_SUBSCRIBE_plugin_basename).'/subscribe_120_16.png'; ?>" width="120" height="16" border="0" style="padding:9px;vertical-align:middle"
+                    <img src="<?php echo $A2A_SUBSCRIBE_plugin_url_path.'/subscribe_120_16.png'; ?>" width="120" height="16" border="0" style="padding:9px;vertical-align:middle"
                     	onclick="this.parentNode.firstChild.checked=true"/>
                 </label><br>
                 <label>
                 	<input name="A2A_SUBSCRIBE_button" value="subscribe_171_16.png|171|16" type="radio"<?php if(get_option('A2A_SUBSCRIBE_button')=='subscribe_171_16.png|171|16') echo ' checked="checked"'; ?>
                     	style="margin:9px 0;vertical-align:middle">
-                    <img src="<?php echo trailingslashit(get_option('siteurl')).PLUGINDIR.'/'.dirname($A2A_SUBSCRIBE_plugin_basename).'/subscribe_171_16.png'; ?>" width="171" height="16" border="0" style="padding:9px;vertical-align:middle"
+                    <img src="<?php echo $A2A_SUBSCRIBE_plugin_url_path.'/subscribe_171_16.png'; ?>" width="171" height="16" border="0" style="padding:9px;vertical-align:middle"
                     	onclick="this.parentNode.firstChild.checked=true"/>
                 </label><br>
                 <label>
                 	<input name="A2A_SUBSCRIBE_button" value="subscribe_256_24.png|256|24" type="radio"<?php if(get_option('A2A_SUBSCRIBE_button')=='subscribe_256_24.png|256|24') echo ' checked="checked"'; ?>
                     	style="margin:9px 0;vertical-align:middle">
-                    <img src="<?php echo trailingslashit(get_option('siteurl')).PLUGINDIR.'/'.dirname($A2A_SUBSCRIBE_plugin_basename).'/subscribe_256_24.png'; ?>" width="256" height="24" border="0" style="padding:9px;vertical-align:middle"
+                    <img src="<?php echo $A2A_SUBSCRIBE_plugin_url_path.'/subscribe_256_24.png'; ?>" width="256" height="24" border="0" style="padding:9px;vertical-align:middle"
                     	onclick="this.parentNode.firstChild.checked=true"/>
 				</label><br>
                 <label>

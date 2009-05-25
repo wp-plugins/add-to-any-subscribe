@@ -1,28 +1,30 @@
-=== Add to Any Subscribe Button ===
+=== Add to Any: Subscribe Button ===
 Contributors: micropat
 Donate link: http://www.addtoany.com/contact/
 Tags: widget, sidebar, rss, plugin, links, feed, feeds, images, admin, button, Post, posts, subscribe, add to any, addtoany, add, any, email, e-mail, mobile, Google, My, Yahoo, Mixx, iTunes, Feeds
 Requires at least: 2.2
-Tested up to: 2.7.1
-Stable tag: 0.9.6.4.1
+Tested up to: 2.8
+Stable tag: 0.9.6.5
 
 Helps readers subscribe to your blog using any feed reader or feed emailer.
 
 == Description ==
 
-Helps readers **subscribe** to your blog using **any feed reader**, such as Google Reader, My Yahoo!, Netvibes, Windows Live, and all other RSS readers.  The button comes with Add to Any's customizable Smart Menu, which **places the services visitors use at the top of the menu**, based on each visitor's browsing history.
-
-* Add to Any <a href="http://www.addtoany.com/blog/smart-menus-the-services-your-visitors-use-displayed-first/" target="_blank">Smart Menu</a>
-* Includes all services
-* Services updated automatically
-* WordPress optimized, localized (i18n for English, Chinese, Danish)
-* Searchable on key-down
-* Keyboard navigation
-* Many more publisher and user features
+Helps readers **subscribe** to your blog using **any feed reader**, such as Google Reader, My Yahoo!, Netvibes, Windows Live, and all other RSS readers.  The button comes with AddToAny's customizable Smart Menu, which **places the services visitors use at the top of the menu**, based on each visitor's browsing history.
 
 <a href="http://www.addtoany.com/" title="Subscribe button and share button" target="_blank">Subscribe Button</a> (demo) | <a href="other_notes/">Changelog</a>
 
-See also, the <a href="/extend/plugins/add-to-any/">Share/Save/Bookmark button</a> plugin.
+* AddToAny <a href="http://www.addtoany.com/blog/smart-menus-the-services-your-visitors-use-displayed-first/" target="_blank">Smart Menu</a>
+* Includes all services
+* Services updated automatically
+* WordPress optimized, localized (i18n for English, Chinese, Danish)
+* Support for WordPress MU (WPMU)
+* Many more publisher and user features
+
+See also:
+
+* The <a href="/extend/plugins/add-to-any/" title="Sharing plugin">Share/Bookmark/Email button</a> plugin.
+* The <a href="http://www.addtoany.com/buttons/for/wordpress_com" title="WordPress.com sharing button widget" target="_blank">Share button for WordPress.com</a> blogs
 
 == Installation ==
 
@@ -34,7 +36,7 @@ See also, the <a href="/extend/plugins/add-to-any/">Share/Save/Bookmark button</
 
 = How often is the list of services updated? =
 
-Constantly.
+Constantly... and it's done automatically without having to upgrade.
 
 = Where can I choose which button to display and other options? =
 
@@ -75,6 +77,10 @@ This can be done through the template tag (as described above).  Simply supply a
 
 This is done to overcome browser limitations that prevent the drop-down menu from displaying on top of intersecting embedded objects.  If you would like to disable this, uncheck the `Hide embedded objects (Flash, video, etc.) that intersect with the menu when displayed` option on the plugin's settings page.
 
+= For WordPress MU (WPMU), how can I set the plugin to automatically execute so that it's available as a widget for all blogs? =
+
+Upload the plugin directory (including all files within) to the `/wp-content/mu-plugins/` folder, then move the `add-to-any-subscribe.php` file from the plugin directory to the `mu-plugins` folder so that it can auto-execute.
+
 == Screenshots ==
 
 1. This is the Add to Any Subscribe button
@@ -82,6 +88,13 @@ This is done to overcome browser limitations that prevent the drop-down menu fro
 3. This is the drop-down menu showing the services available to the user within the Subscribe menu.  Services are constantly added/updated.
 
 == Changelog ==
+
+.9.6.5:
+
+* i18n folder renamed to languages due to a problem with the CodeStyling Localization plugin
+* Fixed textdomain
+* Basename cleanup
+* Support for WPMU auto-execution (thanks <a href="http://www.frozenpc.net/">Aaron</a>)
 
 .9.6.4.1:
 
