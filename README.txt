@@ -3,7 +3,7 @@ Contributors: micropat
 Donate link: http://www.addtoany.com/contact/
 Tags: widget, sidebar, rss, plugin, links, feed, feeds, images, admin, button, Post, posts, subscribe, add to any, addtoany, add, any, email, e-mail, mobile, Google, My, Yahoo, Mixx, iTunes, Feeds
 Requires at least: 2.2
-Tested up to: 2.8
+Tested up to: 2.8.2
 Stable tag: 0.9.7
 
 Helps readers subscribe to your blog using any feed reader or feed emailer.
