@@ -30,7 +30,7 @@ See also:
 
 1. Upload the `add-to-any-subscribe` directory (including all files within) to the `/wp-content/plugins/` directory
 1. Activate the plugin through the `Plugins` menu in WordPress
-1. Go to `Presentation` -> `Widgets` and click `Add` next to "Add to Any Subscribe"
+1. Go to `Appearance` -> `Widgets` and click `Add` next to "Add to Any Subscribe"
 
 == Frequently Asked Questions ==
 
@@ -89,138 +89,119 @@ Upload the plugin directory (including all files within) to the `/wp-content/mu-
 
 == Changelog ==
 
-.9.6.5:
+= .9.7 =
+* Accept optional text with the small Subscribe button
+ * Note: "Subscribe" text will appear by default for the small icon
+* Added admin action links
+* Updated readme
+ * Installation
+ * Changelog formatting
 
+= .9.6.5 =
 * i18n folder renamed to languages due to a problem with the CodeStyling Localization plugin
 * Fixed textdomain
 * Basename cleanup
 * Support for WPMU auto-execution (thanks <a href="http://www.frozenpc.net/">Aaron</a>)
 
-.9.6.4.1:
-
+= .9.6.4.1 =
 * Fix for blogs without titles
 
-.9.6.4:
-
+= .9.6.4 =
 * Automatic localization/i18n
 
-.9.6.3:
-
+= .9.6.3 =
 * wp_footer() detection
 * Replaced short form of PHP's open tags with long form to work around configurations with shortopentag disabled
 
-.9.6.2.2:
-
+= .9.6.2.2 =
 * Settings panel submits to current page instead of unreliable REQUEST_URI which can omit querystring on IIS
  * See http://www.microsoft.com/downloads/results.aspx?freetext=954946
 
-.9.6.2.1:
-
+= .9.6.2.1 =
 * Highlight admin notices
 * Danish translation (by <a href="http://wordpress.blogos.dk/" target="_blank">Georg</a>)
 * FAQ
 
-.9.6.2:
-
+= .9.6.2 =
 * Important syntax fix
 
-.9.6.1:
-
+= .9.6.1 =
 * Additional options / JavaScript API clarification
 * i18n update 
 
-.9.6:
-
+= .9.6 =
 * Widget title option
 * Text-only button stripslashes
 
-.9.5.5.6:
-
+= .9.5.5.6 =
 * Chinese translation updated
 
-.9.5.5.5:
-
+= .9.5.5.5 =
 * i18n
 * Chinese translation
 * Installation clarified
 
-.9.5.5.4:
-
+= .9.5.5.4 =
 * WordPress 2.7 admin styling
 * Settings link on Plugins page
 * Basename var
 
-.9.5.5.3:
-
+= .9.5.5.3 =
 * Less JavaScript redundancy from Additional Options (saves bandwidth)
 * Compressed PNGs added, select a button from settings to begin using PNG (saves bandwidth)
 
-.9.5.5.2:
-
+= .9.5.5.2 =
 * Additional Options in Admin panel provides link to JavaScript API
 * Option to have full addtoany.com legacy page open in a new window
 
-.9.5.5.1:
-
+= .9.5.5.1 =
 * Replaced short form of PHP's open tags with long form to work around configurations with short_open_tag disabled
 
-.9.5.5:
-
+= .9.5.5 =
 * Accomodates renamed plugin directory
 
-.9.5.4:
-
+= .9.5.4 =
 * Fixed a small syntax error (critcal if you're on .9.5.3)
 
-.9.5.3:
-
+= .9.5.3 =
 * Language & localization update
 
-.9.5.2:
-
+= .9.5.2 =
 * Event attributes removed (JS now takes care of button events)
  * This eliminates the chance of errors prior to JS fully loading
 
-.9.5.1:
-
+= .9.5.1 =
 * Fixed repo problem
 
-.9.5:
-
+= .9.5 =
 * Supports custom feeds using through template tag
 * Updated template tag to prevent PHP errors when deactivating plugin
 * For XHTML validation, special characters are converted to HTML entities within JavaScript variables
 * Reprioritized plugin to load later
 * Text-only button option
 
-.9.4:
-
+= .9.4 =
 * Internationalization
 * Buttons updated
 
-.9.3:
-
+= .9.3 =
 * Moved external JavaScript to bottom so that content is prioritized over HTTP requests to static.addtoany.com
  * Please note that some improperly-coded themes may prevent this from working. See the FAQ entry for "Why isn't the drop-down menu appearing?" if this is the case.
 * Added support to better conform to widget-ready themes
 * Fixed markup generation to support list containers and ensure W3C validation
 
-.9.2.2:
-
+= .9.2.2 =
 * Fixed bug in Internet Explorer 6 that caused custom buttons to have a height and width of 0
 * Removed the XHTML depreciated `name` attribute from the button's anchor
 
-.9.2.1:
-
+= .9.2.1 =
 * Fixed 1 line to support those without short_open_tag
 
-.9.2:
-
+= .9.2 =
 * New: Custom buttons (specify a URL)
 * Fix to permit XHTML Strict validation
 
-.9.1:
-
+= .9.1 =
 * New Menu Styler lets you customize the color of the menus
 * New Menu Option: "Only show the menu when the user clicks the Subscribe button"
 * New additional customization: Set custom JavaScript variables

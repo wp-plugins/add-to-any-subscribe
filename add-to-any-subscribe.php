@@ -3,7 +3,7 @@
 Plugin Name: Add to Any: Subscribe Button
 Plugin URI: http://www.addtoany.com/buttons/
 Description: Helps readers subscribe to your blog using any feed reader.  [<a href="widgets.php">Enable Widget</a> | <a href="options-general.php?page=add-to-any-subscribe.php">Settings</a>]
-Version: .9.6.5
+Version: .9.7
 Author: Add to Any
 Author URI: http://www.addtoany.com/contact/
 */
@@ -94,11 +94,23 @@ class Add_to_Any_Subscribe_Widget {
 			$button_width	= ' width="'.$button_attrs[1].'"';
 			$button_height	= ' height="'.$button_attrs[2].'"';
 			$button_src		= $A2A_SUBSCRIBE_plugin_url_path.'/'.$button_fname;
+			$button_text	= stripslashes(get_option('A2A_SUBSCRIBE_button_text'));
 		}
-		if( $button_text ) {
+		
+		if( $button_fname == 'subscribe_16_16.png' ) {
+			if( !is_feed() ) {
+				$style_bg	= 'background:url('.$A2A_SUBSCRIBE_plugin_url_path.'/'.$button_fname.') no-repeat scroll 9px 0px'; // padding-left:9 (9=other icons padding)
+				$style_bg	= ';' . $style_bg . ' !important;';
+				$style		= ' style="'.$style_bg.'padding:0 0 0 30px;display:inline-block;height:16px;line-height:16px;vertical-align:middle;"'; // padding-left:30+9 (9=other icons padding)
+			}
+		}
+		
+		if( $button_text && (!$button_fname || $button_fname == 'subscribe_16_16.png') ) {
 			$button			= $button_text;
-		} else
+		} else {
+			$style = '';
 			$button			= '<img src="'.$button_src.'"'.$button_width.$button_height.' alt="Subscribe"/>';
+		}
 		
 		echo $before_widget;
 		
@@ -109,7 +121,7 @@ class Add_to_Any_Subscribe_Widget {
 				. $after_title;
 		} ?>
 
-        <a class="a2a_dd addtoany_subscribe" href="http://www.addtoany.com/subscribe?linkname=<?php echo $feedname_enc; ?>&amp;linkurl=<?php echo $feedurl_enc; ?>"<?php echo $button_target; ?>><?php echo $button; ?></a>
+        <a class="a2a_dd addtoany_subscribe" href="http://www.addtoany.com/subscribe?linkname=<?php echo $feedname_enc; ?>&amp;linkurl=<?php echo $feedurl_enc; ?>"<?php echo $style . $button_target; ?>><?php echo $button; ?></a>
         <?php echo $after_widget;
 		
 		global $A2A_javascript, $A2A_SUBSCRIBE_external_script_called;
@@ -209,7 +221,7 @@ add_action('wp_head', 'A2A_SUBSCRIBE_button_css');
 
 
 /*************************************************
-		OPTIONS  ( Design > Widgets )
+		OPTIONS  ( Appearance > Widgets )
 *************************************************/
 
 
@@ -222,8 +234,13 @@ function A2A_SUBSCRIBE_options_widget() {
 
 		update_option( 'A2A_SUBSCRIBE_button', $_POST['A2A_SUBSCRIBE_button'] );
 		update_option( 'A2A_SUBSCRIBE_button_custom', $_POST['A2A_SUBSCRIBE_button_custom'] );
-		update_option( 'A2A_SUBSCRIBE_button_text', $_POST['A2A_SUBSCRIBE_button_text'] );
 		update_option( 'A2A_SUBSCRIBE_widget_title', $_POST['A2A_SUBSCRIBE_widget_title'] );
+		
+		// Store desired text if 16 x 16px button or text-only is chosen:
+		if( get_option('A2A_SUBSCRIBE_button') == 'subscribe_16_16.png|16|16' )
+			update_option( 'A2A_SUBSCRIBE_button_text', $_POST['A2A_SUBSCRIBE_button_subscribe_16_16_text'] );
+		else
+			update_option( 'A2A_SUBSCRIBE_button_text', ( trim($_POST['A2A_SUBSCRIBE_button_text']) != '' ) ? $_POST['A2A_SUBSCRIBE_button_text'] : "Subscribe" );
 		
     }
 
@@ -249,6 +266,8 @@ function A2A_SUBSCRIBE_options_widget() {
         	<input class="radio" type="radio"<?php echo $subscribe_16_16; ?> name="A2A_SUBSCRIBE_button" value="subscribe_16_16.png|16|16" style="vertical-align:middle" />
     		<img src="<?php echo $A2A_SUBSCRIBE_plugin_url_path.'/subscribe_16_16.png'; ?>" width="16" height="16" border="0" style="vertical-align:middle" />
 		</label>
+		<input name="A2A_SUBSCRIBE_button_subscribe_16_16_text" type="text" size="50" onclick="e=document.getElementsByName('A2A_SUBSCRIBE_button');e[e.length-6].checked=true" style="vertical-align:middle;width:150px" 
+			value="<?php echo (get_option('A2A_SUBSCRIBE_button_text') !== FALSE) ? stripslashes(get_option('A2A_SUBSCRIBE_button_text')) : "Subscribe"; ?>" />
 	</p>
     <p>
     	<label>
@@ -311,8 +330,13 @@ function A2A_SUBSCRIBE_options_page() {
 		update_option( 'A2A_SUBSCRIBE_button_opens_new_window', ($_POST['A2A_SUBSCRIBE_button_opens_new_window']=='1') ? '1':'-1' );
 		update_option( 'A2A_SUBSCRIBE_button', $_POST['A2A_SUBSCRIBE_button'] );
 		update_option( 'A2A_SUBSCRIBE_button_custom', $_POST['A2A_SUBSCRIBE_button_custom'] );
-		update_option( 'A2A_SUBSCRIBE_button_text', ( trim($_POST['A2A_SUBSCRIBE_button_text']) != '' ) ? $_POST['A2A_SUBSCRIBE_button_text'] : "Subscribe" );
 		update_option( 'A2A_SUBSCRIBE_additional_js_variables', trim($_POST['A2A_SUBSCRIBE_additional_js_variables']) );
+		
+		// Store desired text if 16 x 16px button or text-only is chosen:
+		if( get_option('A2A_SUBSCRIBE_button') == 'subscribe_16_16.png|16|16' )
+			update_option( 'A2A_SUBSCRIBE_button_text', $_POST['A2A_SUBSCRIBE_button_subscribe_16_16_text'] );
+		else
+			update_option( 'A2A_SUBSCRIBE_button_text', ( trim($_POST['A2A_SUBSCRIBE_button_text']) != '' ) ? $_POST['A2A_SUBSCRIBE_button_text'] : "Subscribe" );
 		
 		?>
     	<div class="updated fade"><p><strong><?php _e('Settings saved.'); ?></strong></p></div>
@@ -343,7 +367,9 @@ function A2A_SUBSCRIBE_options_page() {
                     	 style="margin:9px 0;vertical-align:middle">
                     <img src="<?php echo $A2A_SUBSCRIBE_plugin_url_path.'/subscribe_16_16.png'; ?>" width="16" height="16" border="0" style="padding:9px;vertical-align:middle" alt="+ Subscribe" title="+ Subscribe"
                     	onclick="this.parentNode.firstChild.checked=true"/>
-                </label><br>
+                </label>
+				<input name="A2A_SUBSCRIBE_button_subscribe_16_16_text" class="code" type="text" size="50" onclick="e=document.getElementsByName('A2A_SUBSCRIBE_button');e[e.length-6].checked=true" style="vertical-align:middle;width:150px" 
+			value="<?php echo (get_option('A2A_SUBSCRIBE_button_text') !== FALSE) ? stripslashes(get_option('A2A_SUBSCRIBE_button_text')) : "Subscribe"; ?>" /><br>
                 <label>
                 	<input name="A2A_SUBSCRIBE_button" value="subscribe_120_16.png|120|16" type="radio"<?php if( !get_option('A2A_SUBSCRIBE_button') || get_option('A2A_SUBSCRIBE_button' )=='subscribe_120_16.png|120|16' ) echo ' checked="checked"'; ?>
                     	style="margin:9px 0;vertical-align:middle">
@@ -473,14 +499,20 @@ function A2A_SUBSCRIBE_add_menu_link() {
 
 add_action('admin_menu', 'A2A_SUBSCRIBE_add_menu_link');
 
-
-function A2A_SUBSCRIBE_actlinks( $links ) { 
-	// Add a link to this plugin's settings page
-	$settings_link = '<a href="options-general.php?page=add-to-any-subscribe.php">Settings</a>';
-	array_unshift( $links, $settings_link ); 
-	return $links; 
+// Place in Settings Option List
+function A2A_SUBSCRIBE_actlinks( $links, $file ){
+	//Static so we don't call plugin_basename on every plugin row.
+	static $this_plugin;
+	if ( ! $this_plugin ) $this_plugin = plugin_basename(__FILE__);
+	
+	if ( $file == $this_plugin ){
+		$settings_link = '<a href="options-general.php?page=add-to-any-subscribe.php">' . __('Settings') . '</a>';
+		$widgets_link = '<a href="widgets.php">' . __('Widgets') . '</a>';
+		array_unshift( $links, $settings_link, $widgets_link ); // before other links
+	}
+	return $links;
 }
 
-add_filter("plugin_action_links_$A2A_SUBSCRIBE_plugin_basename", 'A2A_SUBSCRIBE_actlinks' ); 
+add_filter("plugin_action_links", 'A2A_SUBSCRIBE_actlinks', 10, 2);
 
 ?>
