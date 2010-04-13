@@ -1,16 +1,13 @@
 <?php
 /*
-Plugin Name: Add to Any: Subscribe Button
+Plugin Name: AddToAny: Subscribe Button
 Plugin URI: http://www.addtoany.com/buttons/
-Description: Helps readers subscribe to your blog using any feed reader.  [<a href="widgets.php">Enable Widget</a> | <a href="options-general.php?page=add-to-any-subscribe.php">Settings</a>]
-Version: .9.7
-Author: Add to Any
-Author URI: http://www.addtoany.com/contact/
+Description: Help readers subscribe to your blog using any feed reader or feed service.  [<a href="widgets.php">Enable Widget</a> | <a href="options-general.php?page=add-to-any-subscribe.php">Settings</a>]
+Version: .9.8
+Author: AddToAny
+Author URI: http://www.addtoany.com/
 */
 
-
-if( !isset($A2A_javascript) )
-	$A2A_javascript = '';
 if( !isset($A2A_locale) )
 	$A2A_locale = '';
 
@@ -124,26 +121,31 @@ class Add_to_Any_Subscribe_Widget {
         <a class="a2a_dd addtoany_subscribe" href="http://www.addtoany.com/subscribe?linkname=<?php echo $feedname_enc; ?>&amp;linkurl=<?php echo $feedurl_enc; ?>"<?php echo $style . $button_target; ?>><?php echo $button; ?></a>
         <?php echo $after_widget;
 		
-		global $A2A_javascript, $A2A_SUBSCRIBE_external_script_called;
-		if( $A2A_javascript == '' || !$A2A_SUBSCRIBE_external_script_called ) {
-			$external_script_call = '</script><script type="text/javascript" src="http://static.addtoany.com/menu/feed.js"></script>';
+		global $A2A_SUBSCRIBE_external_script_called;
+		if ( ! $A2A_SUBSCRIBE_external_script_called ) {
+			// Enternal script call + initial JS + set-once variables
+			$initial_js = 'var a2a_config = a2a_config || {};' . "\n";
+			$additional_js = get_option('A2A_SUBSCRIBE_additional_js_variables');
+			$external_script_call = ((get_option('A2A_SUBSCRIBE_onclick')=='1') ? 'a2a_onclick=1;' . "\n" : '')
+				. ((get_option('A2A_SUBSCRIBE_hide_embeds')=='-1') ? 'a2a_hide_embeds=0;' . "\n" : '')
+				. ((get_option('A2A_SUBSCRIBE_show_title')=='1') ? 'a2a_show_title=1;' . "\n" : '')
+				. (($additional_js) ? stripslashes($additional_js) . "\n" : '')
+				. '</script><script type="text/javascript" src="http://static.addtoany.com/menu/feed.js"></script>';
 			$A2A_SUBSCRIBE_external_script_called = true;
 		}
-		else
-			$external_script_call = 'a2a_init("feed");</script>';
-		$A2A_javascript .= '<script type="text/javascript">' . "\n"
+		else {
+			$external_script_call = 'a2a.init("feed");</script>';
+			$initial_js = '';
+		}
+			
+		$button_javascript = "\n" . '<script type="text/javascript">' . "\n"
+			. $initial_js
 			. A2A_menu_locale()
-			. 'a2a_linkname="' . js_escape($feedname) . '";' . "\n"
-			. 'a2a_linkurl="' . $feedurl . '";' . "\n"
-			. ((get_option('A2A_SUBSCRIBE_onclick')=='1') ? 'a2a_onclick=1;' . "\n" : '')
-			. ((get_option('A2A_SUBSCRIBE_hide_embeds')=='-1') ? 'a2a_hide_embeds=0;' . "\n" : '')
-			. ((get_option('A2A_SUBSCRIBE_show_title')=='1') ? 'a2a_show_title=1;' . "\n" : '')
-			. (($A2A_javascript == '' || !$A2A_SUBSCRIBE_external_script_called) ? stripslashes(get_option('A2A_SUBSCRIBE_additional_js_variables')) . "\n" : '')
+			. 'a2a_config.linkname="' . js_escape($feedname) . '";' . "\n"
+			. 'a2a_config.linkurl="' . $feedurl . '";' . "\n"
 			. $external_script_call . "\n\n";
 		
-		remove_action('wp_footer', 'A2A_menu_javascript');
-		add_action('wp_footer', 'A2A_menu_javascript');
-		
+		echo $button_javascript;
 	}
 	
 }
@@ -151,18 +153,13 @@ class Add_to_Any_Subscribe_Widget {
 // Run our code later in case this loads prior to any required plugins.
 add_action('widgets_init', array('Add_to_Any_Subscribe_Widget','init'), 99);
 
-
-if (!function_exists('A2A_menu_javascript')) {
-	function A2A_menu_javascript() {
-		global $A2A_javascript;
-		echo $A2A_javascript;
-	}
-}
-
 if (!function_exists('A2A_menu_locale')) {
 	function A2A_menu_locale() {
 		global $A2A_locale;
-		if( $A2A_locale != '' ) return false;
+		$locale = get_locale();
+		if($locale  == 'en_US' || $locale == 'en' || $A2A_locale != '' )
+			return false;
+		
 		$A2A_locale = 'a2a_localize = {
 	Share: "' . __("Share", "add-to-any") . '",
 	Save: "' . __("Save", "add-to-any") . '",
