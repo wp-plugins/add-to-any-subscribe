@@ -4,7 +4,7 @@ Donate link: http://www.addtoany.com/contact/
 Tags: widget, sidebar, rss, plugin, links, feed, feeds, images, admin, button, Post, posts, subscribe, add to any, addtoany, add, any, email, e-mail, mobile, Google, My, Yahoo, Mixx, iTunes, Feeds
 Requires at least: 2.2
 Tested up to: 3.0
-Stable tag: 0.9.8
+Stable tag: 0.9.8.1
 
 Help readers subscribe to your blog using any feed reader or feed service.
 
@@ -88,6 +88,10 @@ Upload the plugin directory (including all files within) to the `/wp-content/mu-
 3. This is the drop-down menu showing the services available to the user within the Subscribe menu.  Services are constantly added/updated.
 
 == Changelog ==
+
+= .9.8.1 =
+* SSL - HTTPS support
+* Fixed a potential semantic HTML validation issue when used as a WordPress widget
 
 = .9.8 =
 * Important note: If you are using the AddToAny Share plugin, be sure to update that plugin to version 9.9.5+

@@ -3,7 +3,7 @@
 Plugin Name: AddToAny: Subscribe Button
 Plugin URI: http://www.addtoany.com/buttons/
 Description: Help readers subscribe to your blog using any feed reader or feed service.  [<a href="widgets.php">Enable Widget</a> | <a href="options-general.php?page=add-to-any-subscribe.php">Settings</a>]
-Version: .9.8
+Version: .9.8.1
 Author: AddToAny
 Author URI: http://www.addtoany.com/
 */
@@ -119,7 +119,12 @@ class Add_to_Any_Subscribe_Widget {
 		} ?>
 
         <a class="a2a_dd addtoany_subscribe" href="http://www.addtoany.com/subscribe?linkname=<?php echo $feedname_enc; ?>&amp;linkurl=<?php echo $feedurl_enc; ?>"<?php echo $style . $button_target; ?>><?php echo $button; ?></a>
-        <?php echo $after_widget;
+        <?php 
+		
+		if (function_exists('is_ssl') ) // @since 2.6.0
+			$http_or_https = (is_ssl()) ? 'https' : 'http';
+		else
+			$http_or_https = 'http';
 		
 		global $A2A_SUBSCRIBE_external_script_called;
 		if ( ! $A2A_SUBSCRIBE_external_script_called ) {
@@ -130,7 +135,7 @@ class Add_to_Any_Subscribe_Widget {
 				. ((get_option('A2A_SUBSCRIBE_hide_embeds')=='-1') ? 'a2a_hide_embeds=0;' . "\n" : '')
 				. ((get_option('A2A_SUBSCRIBE_show_title')=='1') ? 'a2a_show_title=1;' . "\n" : '')
 				. (($additional_js) ? stripslashes($additional_js) . "\n" : '')
-				. '</script><script type="text/javascript" src="http://static.addtoany.com/menu/feed.js"></script>';
+				. '</script><script type="text/javascript" src="' . $http_or_https . '://static.addtoany.com/menu/feed.js"></script>';
 			$A2A_SUBSCRIBE_external_script_called = true;
 		}
 		else {
@@ -146,6 +151,8 @@ class Add_to_Any_Subscribe_Widget {
 			. $external_script_call . "\n\n";
 		
 		echo $button_javascript;
+		
+		echo $after_widget;
 	}
 	
 }
