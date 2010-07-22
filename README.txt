@@ -1,16 +1,16 @@
 === AddToAny: Subscribe Button ===
 Contributors: micropat
 Donate link: http://www.addtoany.com/contact/
-Tags: widget, sidebar, rss, plugin, links, feed, feeds, images, admin, button, Post, posts, subscribe, add to any, addtoany, add, any, email, e-mail, mobile, Google, My, Yahoo, Mixx, iTunes, Feeds
+Tags: widget, sidebar, rss, plugin, links, feed, feeds, images, admin, button, Post, posts, subscribe, add to any, addtoany, add, any, email, e-mail, mobile, Google, My, Yahoo, iTunes, Feeds
 Requires at least: 2.2
 Tested up to: 3.0
-Stable tag: 0.9.8.1
+Stable tag: 0.9.9
 
-Help readers subscribe to your blog using any feed reader or feed service.
+Help people subscribe to your blog using email or any feed reader, such as Google Reader, My Yahoo! and many more feed services.
 
 == Description ==
 
-Helps readers **subscribe** to your blog using **any feed reader**, such as Google Reader, My Yahoo!, Netvibes, Windows Live, and all other RSS readers.  The button comes with AddToAny's customizable Smart Menu, which **places the services visitors use at the top of the menu**, based on each visitor's browsing history.
+The Subscribe button helps people **subscribe** to your blog using **any feed reader**, such as Google Reader, My Yahoo!, Netvibes, Windows Live, and all other RSS readers.  The button comes with AddToAny's customizable Smart Menu, which **places the services visitors use at the top of the menu**, based on each visitor's browsing and usage history.
 
 <a href="http://www.addtoany.com/buttons/subscribe" title="Subscribe button and share button" target="_blank">Subscribe Button</a> (standard)
 
@@ -88,6 +88,19 @@ Upload the plugin directory (including all files within) to the `/wp-content/mu-
 3. This is the drop-down menu showing the services available to the user within the Subscribe menu.  Services are constantly added/updated.
 
 == Changelog ==
+
+= .9.9 =
+* Major rewrite to support New Widgets API since WP 2.8
+* Work around WP core issue to use HTTPS/SSL for static content files, like the buttons and files in admin
+ * http://core.trac.wordpress.org/ticket/13941
+* Nonce validation for admin form
+* Switch more options to <a href="http://www.addtoany.com/blog/new-menu-api-examples-documentation/">new API spec</a>
+* Deprecate embedded object hiding option in favor of Menu API due to a new automatic workaround and a change in default value
+ * If you need to have AddToAny hide objects (like Flash) to display the AddToAny menu, set a2a_config.hide_embeds = 1; in the Additional Options box
+* Fixes for debug mode notices
+* Planned support for multi-widget (different options per widget instance)
+ * Not yet implemented
+* Spaces in "Add to Any" removed, now camel-case: "AddToAny"
 
 = .9.8.1 =
 * SSL - HTTPS support
@@ -215,7 +228,7 @@ Upload the plugin directory (including all files within) to the `/wp-content/mu-
 
 = .9.2.2 =
 * Fixed bug in Internet Explorer 6 that caused custom buttons to have a height and width of 0
-* Removed the XHTML depreciated `name` attribute from the button's anchor
+* Removed the XHTML deprecated `name` attribute from the button's anchor
 
 = .9.2.1 =
 * Fixed 1 line to support those without short_open_tag
