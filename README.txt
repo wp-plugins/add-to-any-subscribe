@@ -2,9 +2,9 @@
 Contributors: micropat
 Donate link: http://www.addtoany.com/contact/
 Tags: widget, sidebar, rss, plugin, links, feed, feeds, images, admin, button, Post, posts, subscribe, add to any, addtoany, add, any, email, e-mail, mobile, Google, My, Yahoo, iTunes, Feeds
-Requires at least: 2.2
+Requires at least: 2.8
 Tested up to: 3.0
-Stable tag: 0.9.9
+Stable tag: 0.9.9.1
 
 Help people subscribe to your blog using email or any feed reader, such as Google Reader, My Yahoo! and many more feed services.
 
@@ -88,6 +88,13 @@ Upload the plugin directory (including all files within) to the `/wp-content/mu-
 3. This is the drop-down menu showing the services available to the user within the Subscribe menu.  Services are constantly added/updated.
 
 == Changelog ==
+
+= .9.9.1 =
+* Fix critical issue affecting hard-coded placements using the template code function
+ * http://wordpress.org/support/topic/428113
+* Replace deprecated function
+* Fixes for debug mode notices
+* Add Italian translation by <a href="http://gidibao.net/">Gianni</a>
 
 = .9.9 =
 * Major rewrite to support New Widgets API since WP 2.8

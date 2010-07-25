@@ -3,7 +3,7 @@
 Plugin Name: AddToAny: Subscribe Button
 Plugin URI: http://www.addtoany.com/buttons/
 Description: Help readers subscribe to your blog using any feed reader or feed service.  [<a href="widgets.php">Enable Widget</a> | <a href="options-general.php?page=add-to-any-subscribe.php">Settings</a>]
-Version: .9.9
+Version: .9.9.1
 Author: AddToAny
 Author URI: http://www.addtoany.com/
 */
@@ -50,22 +50,31 @@ class Add_to_Any_Subscribe_Widget extends WP_Widget {
     }
 	
 	/** Backwards compatibility for Add_to_Any_Subscribe_Widget::display(); usage */
-	function display( $args = false, $instance ) {
-		widget($args, $instance);
+	function display( $args = false ) {
+		self::widget($args, NULL);
 	}
 
     /** @see WP_Widget::widget */	
-	function widget($args = false, $instance) {
+	function widget($args = array(), $instance) {
 	
 		global $A2A_SUBSCRIBE_plugin_url_path;
 		
-		if( $args )
-			extract( $args );
+		$defaults = array(
+			'feedname' => get_bloginfo('name'),
+			'feedname_enc' => '',
+			'feedurl' => get_bloginfo('rss2_url'),
+			'$feedurl_enc' => '',
+			'before_widget' => '',
+			'after_widget' => '',
+			'before_title' => '',
+			'after_title' => '',
+		);
 		
-		$feedname		= (isset($feedname)) ? $feedname : get_bloginfo('name');
+		$args = wp_parse_args( $args, $defaults );
+		extract( $args );
+		
 		$feedname		= ($feedname=='') ? 'Blog' : $feedname ; // Blog name cannot be blank for A2A
 		$feedname_enc	= rawurlencode( $feedname );
-		$feedurl		= (isset($feedurl)) ? $feedurl : get_bloginfo('rss2_url');
 		$feedurl_enc 	= rawurlencode( $feedurl );
 		$style 			= '';
 		
@@ -142,7 +151,7 @@ class Add_to_Any_Subscribe_Widget extends WP_Widget {
 		$button_javascript = "\n" . '<script type="text/javascript">' . "//<![CDATA[\n"
 			. $initial_js
 			. A2A_menu_locale()
-			. 'a2a_config.linkname="' . js_escape($feedname) . '";' . "\n"
+			. 'a2a_config.linkname="' . esc_js($feedname) . '";' . "\n"
 			. 'a2a_config.linkurl="' . $feedurl . '";' . "\n"
 			. $external_script_call . "\n\n";
 		
