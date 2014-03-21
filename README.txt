@@ -1,30 +1,30 @@
-=== AddToAny: Subscribe Button ===
+=== Subscribe Button by AddToAny ===
 Contributors: micropat
-Donate link: http://www.addtoany.com/contact/
-Tags: widget, sidebar, rss, plugin, links, feed, feeds, images, admin, button, Post, posts, subscribe, add to any, addtoany, add, any, email, e-mail, mobile, Google, My, Yahoo, iTunes, Feeds
+Tags: widget, sidebar, rss, plugin, links, feed, feeds, images, admin, button, Post, posts, subscribe, subscription, add to any, addtoany, add, any, email, e-mail, mobile, Feedly, AOL Reader, My Yahoo, iTunes, Google Reader, Feeds, feed reader, feed readers
 Requires at least: 2.8
-Tested up to: 3.0
-Stable tag: 0.9.9.1
+Tested up to: 3.9
+Stable tag: .9.9.2
 
-Help people subscribe to your blog using email or any feed reader, such as Google Reader, My Yahoo! and many more feed services.
+Help visitors subscribe to your blog using email or any feed reader, such as Feedly, My Yahoo!, AOL Reader, and many more feed services.
 
 == Description ==
 
-The Subscribe button helps people **subscribe** to your blog using **any feed reader**, such as Google Reader, My Yahoo!, Netvibes, Windows Live, and all other RSS readers.  The button comes with AddToAny's customizable Smart Menu, which **places the services visitors use at the top of the menu**, based on each visitor's browsing and usage history.
+The Subscribe button helps people subscribe to your blog using any feed reader, such as Feedly, My Yahoo!, AOL Reader, and all other RSS readers.
 
-<a href="http://www.addtoany.com/buttons/subscribe" title="Subscribe button and share button" target="_blank">Subscribe Button</a> (standard)
+The button displays AddToAny's customizable Smart Menu, which places the services visitors use at the top of the menu, based on each visitor's preferences.
 
-* AddToAny <a href="http://www.addtoany.com/blog/smart-menus-the-services-your-visitors-use-displayed-first/" target="_blank">Smart Menu</a>
+<a href="http://www.addtoany.com/buttons/for/website/subscribe" title="Subscribe button" target="_blank">Subscribe Button</a> (standard version)
+
+* AddToAny Smart Menu
 * Includes all services
 * Services updated automatically
 * WordPress optimized, localized (i18n for English, Chinese, French, Danish)
-* Support for WordPress MU (WPMU)
+* Supports WordPress MU (WPMU)
 * Many more publisher and user features
 
 See also:
 
-* The <a href="/extend/plugins/add-to-any/" title="Sharing plugin">Share/Bookmark/Email button</a> plugin.
-* The <a href="http://www.addtoany.com/buttons/for/wordpress_com" title="WordPress.com sharing button widget" target="_blank">Share button for WordPress.com</a> blogs
+* The <a href="/plugins/add-to-any/" title="Sharing plugin">Share Buttons</a> plugin
 
 == Installation ==
 
@@ -34,13 +34,13 @@ See also:
 
 == Frequently Asked Questions ==
 
-= How often is the list of services updated? =
+= Where are the options, and how can I customize the subscription plugin? =
 
-Constantly... and it's done automatically without having to upgrade.
+Go to `Settings` > `Subscribe Buttons`, and `Appearance` > `Widgets` for configuring AddToAny Subscribe widgets.
 
-= Where can I choose which button to display and other options? =
+= How can I get subscription analytics? =
 
-Go to `Settings` > `Subscribe Buttons`. 
+<a href="https://www.feedblitz.com/">FeedBlitz</a> and Google's FeedBurner offer subscription analytics. See <a href="http://codex.wordpress.org/Using_FeedBurner">Using FeedBurner</a> for implementing Google's FeedBurner.
 
 = Why isn't the drop-down menu appearing for the button? =
 
@@ -60,16 +60,16 @@ Also, be sure to deactivate any previous versions of the widget in the `Plugins`
 
 Using the Theme Editor, you can place the following code in your template pages (within sidebar.php, index.php, single.php, and/or page.php):
 
-`<?php if( class_exists('Add_to_Any_Subscribe_Widget') ) { Add_to_Any_Subscribe_Widget::display(); } ?>`
+`<?php if ( class_exists( 'Add_to_Any_Subscribe_Widget' ) ) { Add_to_Any_Subscribe_Widget::display(); } ?>`
 
 = How can I customize the feed of the widget? (Useful for comment feeds, category feeds, etc.) =
 
 This can be done through the template tag (as described above).  Simply supply a feed name and feed URL through the template tag like so:
 
-`<?php if( class_exists('Add_to_Any_Subscribe_Widget') ) {
+`<?php if ( class_exists( 'Add_to_Any_Subscribe_Widget' ) ) {
 	$A2A_SUBSCRIBE_options = array(
-		"feedname" => "Name of the Feed",
-		"feedurl" => "http://www.example.com/feed");
+		'feedname' => 'Name of the Feed',
+		'feedurl' => 'http://www.example.com/feed');
 	Add_to_Any_Subscribe_Widget::display( $A2A_SUBSCRIBE_options );
 } ?>`
 
@@ -88,6 +88,11 @@ Upload the plugin directory (including all files within) to the `/wp-content/mu-
 3. This is the drop-down menu showing the services available to the user within the Subscribe menu.  Services are constantly added/updated.
 
 == Changelog ==
+
+= .9.9.2 =
+* Remove cobwebs. Seriously, it's been a while.
+* Update descriptions in settings
+* Update code style
 
 = .9.9.1 =
 * Fix critical issue affecting hard-coded placements using the template code function
