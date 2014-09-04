@@ -2,7 +2,7 @@
 Contributors: micropat
 Tags: widget, sidebar, rss, plugin, links, feed, feeds, images, admin, button, Post, posts, subscribe, subscription, add to any, addtoany, add, any, email, e-mail, mobile, Feedly, AOL Reader, My Yahoo, iTunes, Google Reader, Feeds, feed reader, feed readers
 Requires at least: 2.8
-Tested up to: 3.9
+Tested up to: 4.0
 Stable tag: .9.9.2
 
 Help visitors subscribe to your blog using email or any feed reader, such as Feedly, My Yahoo!, AOL Reader, and many more feed services.
