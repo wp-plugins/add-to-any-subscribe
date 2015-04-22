@@ -1,8 +1,8 @@
 === Subscribe Button by AddToAny ===
-Contributors: micropat
+Contributors: micropat, addtoany
 Tags: widget, sidebar, rss, plugin, links, feed, feeds, images, admin, button, Post, posts, subscribe, subscription, add to any, addtoany, add, any, email, e-mail, mobile, Feedly, AOL Reader, My Yahoo, iTunes, Google Reader, Feeds, feed reader, feed readers
 Requires at least: 2.8
-Tested up to: 4.0
+Tested up to: 4.2
 Stable tag: .9.9.2
 
 Help visitors subscribe to your blog using email or any feed reader, such as Feedly, My Yahoo!, AOL Reader, and many more feed services.
@@ -13,13 +13,13 @@ The Subscribe button helps people subscribe to your blog using any feed reader, 
 
 The button displays AddToAny's customizable Smart Menu, which places the services visitors use at the top of the menu, based on each visitor's preferences.
 
-<a href="http://www.addtoany.com/buttons/for/website/subscribe" title="Subscribe button" target="_blank">Subscribe Button</a> (standard version)
+<a href="https://www.addtoany.com/buttons/for/website/subscribe" title="Subscribe button" target="_blank">Subscribe Button</a> (standard version)
 
 * AddToAny Smart Menu
 * Includes all services
 * Services updated automatically
-* WordPress optimized, localized (i18n for English, Chinese, French, Danish)
-* Supports WordPress MU (WPMU)
+* WordPress optimized, localized (i18n)
+* Supports WordPress Multisite Networks (MS)
 * Many more publisher and user features
 
 See also:
@@ -83,7 +83,7 @@ Upload the plugin directory (including all files within) to the `/wp-content/mu-
 
 == Screenshots ==
 
-1. This is the AddTo Subscribe button
+1. This is the AddToAny Subscribe button
 2. This is the drop-down menu that appears instantly when visitors move the mouse over the Subscribe button
 3. This is the drop-down menu showing the services available to the user within the Subscribe menu.  Services are constantly added/updated.
 
@@ -106,7 +106,7 @@ Upload the plugin directory (including all files within) to the `/wp-content/mu-
 * Work around WP core issue to use HTTPS/SSL for static content files, like the buttons and files in admin
  * http://core.trac.wordpress.org/ticket/13941
 * Nonce validation for admin form
-* Switch more options to <a href="http://www.addtoany.com/blog/new-menu-api-examples-documentation/">new API spec</a>
+* Switch more options to <a href="https://www.addtoany.com/blog/new-menu-api-examples-documentation/">new API spec</a>
 * Deprecate embedded object hiding option in favor of Menu API due to a new automatic workaround and a change in default value
  * If you need to have AddToAny hide objects (like Flash) to display the AddToAny menu, set a2a_config.hide_embeds = 1; in the Additional Options box
 * Fixes for debug mode notices
@@ -121,7 +121,7 @@ Upload the plugin directory (including all files within) to the `/wp-content/mu-
 = .9.8 =
 * Important note: If you are using the AddToAny Share plugin, be sure to update that plugin to version 9.9.5+
 * Faster menu initialization
-* Switched to AddToAny's <a href="http://www.addtoany.com/blog/new-menu-api-examples-documentation/">new API spec</a>
+* Switched to AddToAny's <a href="https://www.addtoany.com/blog/new-menu-api-examples-documentation/">new API spec</a>
 * Fixed localization
 * Also no longer outputs language strings if WordPress locale is set to "en" (or the default "en_US")
 * Updated AddToAny icon
