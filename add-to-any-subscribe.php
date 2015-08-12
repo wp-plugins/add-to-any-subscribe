@@ -168,7 +168,7 @@ class Add_to_Any_Subscribe_Widget extends WP_Widget {
 	/**
 	 * @param array $instance
 	 */
-	function form($instance) {
+	function form( $instance ) {
 		A2A_SUBSCRIBE_options_widget();
 	}
 	
