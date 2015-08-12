@@ -2,8 +2,8 @@
 Contributors: micropat, addtoany
 Tags: widget, sidebar, rss, plugin, links, feed, feeds, images, admin, button, Post, posts, subscribe, subscription, add to any, addtoany, add, any, email, e-mail, mobile, Feedly, AOL Reader, My Yahoo, iTunes, Google Reader, Feeds, feed reader, feed readers
 Requires at least: 2.8
-Tested up to: 4.2
-Stable tag: .9.9.2
+Tested up to: 4.3
+Stable tag: .9.9.3
 
 Help visitors subscribe to your blog using email or any feed reader, such as Feedly, My Yahoo!, AOL Reader, and many more feed services.
 
@@ -40,21 +40,17 @@ Go to `Settings` > `Subscribe Buttons`, and `Appearance` > `Widgets` for configu
 
 = How can I get subscription analytics? =
 
-<a href="https://www.feedblitz.com/">FeedBlitz</a> and Google's FeedBurner offer subscription analytics. See <a href="http://codex.wordpress.org/Using_FeedBurner">Using FeedBurner</a> for implementing Google's FeedBurner.
+<a href="http://www.feedblitz.com/">FeedBlitz</a> and Google's FeedBurner offer subscription analytics. See <a href="https://codex.wordpress.org/Using_FeedBurner">Using FeedBurner</a> for implementing Google's FeedBurner.
 
 = Why isn't the drop-down menu appearing for the button? =
 
-It's likely because your theme wasn't <a href="http://codex.wordpress.org/Theme_Development#Plugin_API_Hooks" target="_blank">coded properly</a>.  Using the Theme Editor, make sure that the following piece of code is included in your theme's `footer.php` file just before the `</body>` line:
+It's likely because your theme wasn't <a href="https://codex.wordpress.org/Theme_Development#Plugin_API_Hooks" target="_blank">coded properly</a>.  Using the Theme Editor, make sure that the following piece of code is included in your theme's `footer.php` file just before the `</body>` line:
 
 `<?php wp_footer(); ?>`
 
 = How come the widget doesn't display once I activate it? =
 
 You'll have to manually put it where you want it in your sidebar.  You can do so by going to `Presentation` > `Widgets` and clicking `Add` next to "AddToAny Subscribe".  You'll need to have a "widget ready" theme.
-
-If you have already added the widget but the actual button is not displaying, you should reinstall the widget, making sure to copy the actual `add-to-any-subscribe` folder (and all of its contents) to your plugins folder.
-
-Also, be sure to deactivate any previous versions of the widget in the `Plugins` tab.
 
 = What if I don't have a "widget ready" theme, or I want to place the button somewhere else? =
 
@@ -88,6 +84,10 @@ Upload the plugin directory (including all files within) to the `/wp-content/mu-
 3. This is the drop-down menu showing the services available to the user within the Subscribe menu.  Services are constantly added/updated.
 
 == Changelog ==
+
+= .9.9.3 =
+* Switch from deprecated PHP 4 constructor to PHP 5 constructor
+* Update some URLs to HTTPS
 
 = .9.9.2 =
 * Remove cobwebs. Seriously, it's been a while.

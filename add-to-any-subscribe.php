@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: Subscribe Button by AddToAny
-Plugin URI: http://www.addtoany.com/
+Plugin URI: https://www.addtoany.com/
 Description: Help readers subscribe to your blog using any feed reader or feed service.  [<a href="widgets.php">Enable Widget</a> | <a href="options-general.php?page=add-to-any-subscribe.php">Settings</a>]
-Version: .9.9.2
+Version: .9.9.3
 Author: AddToAny
-Author URI: http://www.addtoany.com/
+Author URI: https://www.addtoany.com/
 */
 
 if ( ! isset( $A2A_locale ) )
@@ -46,8 +46,9 @@ add_action( 'init', 'A2A_SUBSCRIBE_textdomain' );
 		
 class Add_to_Any_Subscribe_Widget extends WP_Widget {
 	/** constructor */
-	function Add_to_Any_Subscribe_Widget() {
-		parent::WP_Widget( '', 'AddToAny Subscribe Button', array( 'description' => 'A button to help people subscribe to your blog using any service' ), array( 'width' => 400 ) );	
+	function __construct() {
+		$widget_ops = array( 'description' => 'Subscribe button to help people subscribe to your blog using any service.' );
+		parent::__construct( '', 'AddToAny Subscribe', $widget_ops );	
 	}
 	
 	/** Backwards compatibility for Add_to_Any_Subscribe_Widget::display(); usage */
@@ -55,7 +56,10 @@ class Add_to_Any_Subscribe_Widget extends WP_Widget {
 		self::widget( $args, null );
 	}
 
-	/** @see WP_Widget::widget */	
+	/**
+	 * @param array $args
+	 * @param array $instance
+	 */
 	function widget( $args = array(), $instance ) {
 	
 		global $A2A_SUBSCRIBE_plugin_url_path;
@@ -125,7 +129,7 @@ class Add_to_Any_Subscribe_Widget extends WP_Widget {
 				. $after_title;
 		} ?>
 
-		<a class="a2a_dd addtoany_subscribe" href="http://www.addtoany.com/subscribe?linkname=<?php echo $feedname_enc; ?>&amp;linkurl=<?php echo $feedurl_enc; ?>"<?php echo $style . $button_target; ?>><?php echo $button; ?></a>
+		<a class="a2a_dd addtoany_subscribe" href="https://www.addtoany.com/subscribe?linkname=<?php echo $feedname_enc; ?>&amp;linkurl=<?php echo $feedurl_enc; ?>"<?php echo $style . $button_target; ?>><?php echo $button; ?></a>
 		<?php 
 		
 		if (function_exists('is_ssl') ) // @since 2.6.0
@@ -161,7 +165,9 @@ class Add_to_Any_Subscribe_Widget extends WP_Widget {
 		echo $after_widget;
 	}
 	
-	/** @see WP_Widget::form */
+	/**
+	 * @param array $instance
+	 */
 	function form($instance) {
 		A2A_SUBSCRIBE_options_widget();
 	}
@@ -431,7 +437,7 @@ function A2A_SUBSCRIBE_options_page() {
 			<td><fieldset>
 					<p><?php _e("Using AddToAny's Menu Styler, you can customize the colors of your Subscribe menu! When you're done, be sure to paste the generated code in the <a href=\"#\" onclick=\"document.getElementById('A2A_SUBSCRIBE_additional_js_variables').focus();return false\">Additional Options</a> box below.", "add-to-any-subscribe"); ?></p>
 					<p>
-						<a href="http://www.addtoany.com/buttons/subscribe/menu_style/wordpress" class="button-secondary" title="<?php _e("Open the AddToAny Menu Styler in a new window", "add-to-any-subscribe"); ?>" target="_blank"
+						<a href="https://www.addtoany.com/buttons/subscribe/menu_style/wordpress" class="button-secondary" title="<?php _e("Open the AddToAny Menu Styler in a new window", "add-to-any-subscribe"); ?>" target="_blank"
 							onclick="document.getElementById('A2A_SUBSCRIBE_additional_js_variables').focus();
 								document.getElementById('A2A_SUBSCRIBE_menu_styler_note').style.display='';"><?php _e("Open Menu Styler", "add-to-any-subscribe"); ?></a>
 					</p>
@@ -470,7 +476,7 @@ function A2A_SUBSCRIBE_options_page() {
 					</p>
 					<label for="A2A_SUBSCRIBE_additional_js_variables">
 						<p><?php _e("Below you can set special JavaScript variables to apply to your Subscribe menu.", "add-to-any-subscribe"); ?>
-						<?php _e("Advanced users might want to explore AddToAny's <a href=\"http://www.addtoany.com/buttons/api/\" target=\"_blank\">JavaScript API</a>.", "add-to-any-subscribe"); ?></p>
+						<?php _e("Advanced users might want to explore AddToAny's <a href=\"https://www.addtoany.com/buttons/api/\" target=\"_blank\">JavaScript API</a>.", "add-to-any-subscribe"); ?></p>
 					</label>
 					<p>
 						<textarea name="A2A_SUBSCRIBE_additional_js_variables" id="A2A_SUBSCRIBE_additional_js_variables" class="code" style="width: 98%; font-size: 12px;" rows="5" cols="50"><?php echo stripslashes(get_option('A2A_SUBSCRIBE_additional_js_variables')); ?></textarea>
